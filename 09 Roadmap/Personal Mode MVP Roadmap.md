@@ -7,6 +7,7 @@
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
+- [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 
 ## Phase 0 - Repository and Skeleton
 
@@ -90,11 +91,18 @@
 - Windows와 Linux Worktree 테스트
 - 안전한 명령 실행
 - 테스트와 Diff 증거
+- Remote Test Runner Node 등록
+- Tailscale 또는 같은 사설 네트워크 연결 후보
+- Worker Capability 기반 원격 test/build/lint
+- Git commit checkout 기반 실행
+- Artifact Store 업로드와 Worker Report
+- Owner artifact 원본 검토
 
 완료 조건:
 
 - Worker가 별도 Worktree에서 파일을 수정하고 diff와 테스트 결과를 남긴다.
 - 기본 작업 디렉터리의 미커밋 변경을 덮어쓰지 않는다.
+- Worker가 Task Attempt 범위에서 등록된 Runner를 사용하고 Owner가 Worker Report와 원본 artifact를 검토할 수 있다.
 
 주요 위험:
 
@@ -183,5 +191,5 @@
 - 중앙 account 로그인과 다중 기기 동기화
 - Background Service 설치 방식
 - Tailscale 기반 원격 Node 연결
-- Remote Test Runner 상세 설계
+- Remote AI Worker Node
 - macOS 공식 지원

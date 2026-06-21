@@ -78,6 +78,15 @@
 - Session은 opaque random token을 사용하고 SQLite에는 token hash만 저장한다.
 - MVP는 Device·Session 목록과 개별·전체 폐기 기능을 포함한다.
 - Remote Test Runner 상세 설계는 ADR-0012로 분리한다.
+- Remote Test Runner는 Owner Tool이나 독립 AI Worker가 아니라 Worker Capability다.
+- Owner는 Remote Test Runner를 직접 조작하지 않고 Worker가 Task Attempt 범위에서 사용한다.
+- Remote Test Runner는 판단 주체가 아닌 test/build/lint 실행 환경이다.
+- Remote Test Runner는 코드 수정, commit, merge와 배포를 하지 않는다.
+- MVP Remote Test Runner는 Git clone/fetch/checkout 기반으로 실행한다.
+- Runner 산출물은 Main App Artifact Store에 업로드하고 SQLite에는 `artifact_ref`를 저장한다.
+- Worker는 artifact를 분석해 Worker Report를 작성한다.
+- Owner와 UI는 `artifact_ref`를 통해 필요 시 원본 artifact를 열람할 수 있다.
+- Tailscale은 앱 접속 수단이 아니라 Remote Test Runner 연결을 위한 선택적 사설 네트워크 후보다.
 
 관련 문서:
 
@@ -89,6 +98,7 @@
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
+- [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 
 ## 우선 답할 질문
 
@@ -147,11 +157,17 @@
 53. pairing code의 정확한 UX와 표시 위치는 무엇인가?
 54. Device 정보와 접속 출처의 보존 기간은 얼마인가?
 55. 팀 중앙 account와 로컬 Session은 어떻게 연결하는가?
-56. Remote Test Runner를 Worker Tool 또는 Worker Capability로 모델링하는 상세 방식은 무엇인가?
-57. Worker가 Remote Test Runner를 호출하는 Tool Contract는 무엇인가?
-58. Tailscale 또는 다른 사설 네트워크 기반 원격 Node 연결 방식은 무엇인가?
-59. Test Runner 등록, 인증, 권한과 heartbeat는 어떻게 처리하는가?
-60. Test Runner 산출물을 Main App Artifact Store에 업로드하는 protocol은 무엇인가?
-61. Worker가 artifact를 분석해 Owner에게 보고하는 Worker Report 형식은 무엇인가?
-62. Owner가 `artifact_ref`로 원본 artifact를 열람하는 Tool은 무엇인가?
-63. Worker가 테스트 설정을 변경해 재시도할 수 있는 범위는 어디까지인가?
+56. Remote Test Runner Agent의 구현 방식은 무엇인가?
+57. Worker와 Test Runner Agent 사이의 정확한 network protocol은 무엇인가?
+58. Tailscale을 자동 감지하고 설정 상태를 어떻게 표시하는가?
+59. LAN, SSH tunnel과 relay는 어떤 순서로 지원하는가?
+60. Test Runner command allow/deny policy는 어떻게 정의하는가?
+61. Test Runner process와 checkout의 sandboxing 방식은 무엇인가?
+62. secret과 environment variable을 Runner에 어떻게 전달하는가?
+63. artifact upload protocol과 중단 재개 방식은 무엇인가?
+64. screenshot과 screen recording은 어떤 방식으로 capture하는가?
+65. binary artifact retention 정책은 무엇인가?
+66. Test Runner Node credential rotation은 어떻게 처리하는가?
+67. Remote AI Worker Node를 지원할 것인가?
+68. 팀 공유 Test Runner Pool은 어떻게 설계하는가?
+69. Enterprise runner isolation 정책은 무엇인가?

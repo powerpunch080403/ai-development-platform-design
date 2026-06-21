@@ -9,6 +9,7 @@
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
+- [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 
 ## 개인 모드
 
@@ -36,6 +37,9 @@ SQLite를 사용한다.
 - worker_runs
 - worker_claims
 - worker_leases
+- test_runner_nodes
+- test_runs
+- worker_reports
 - run_checkpoints
 - owner_memories
 - pending_approvals
@@ -73,6 +77,10 @@ ProjectRepository, Work Item, Task, Task Attempt, Conversation, Agent Run과 Git
 `account_links`는 nullable 중앙 `account_id`와 link status를 local user에 연결한다. `devices`는 device type, name과 `last_seen_at`을, `sessions`는 `device_id`, `local_user_id`, nullable `account_id`, `token_hash`, `last_seen_at`, `idle_expires_at`, `absolute_expires_at`, `revoked_at`을 추적한다. `pairing_codes`에는 code 원문이 아니라 hash, 만료와 사용 시각을 저장한다.
 
 중앙 account 원본과 다중 기기 동기화는 Personal Mode MVP SQLite의 책임이 아니다. 동기화 schema, conflict resolution과 중앙 Session 모델은 후속 설계로 남긴다.
+
+`test_runner_nodes`는 Node status, capabilities, network kind, 허용 Project/Repository, `last_seen_at`과 폐기를 추적한다. `test_runs`는 Task Attempt, Worker Run, Runner Node, repository, `commit_sha`, environment, test target, command summary, status, timeout과 `retry_of_test_run_id`를 연결한다. `worker_reports`는 Test Run 분석, failure hypothesis, retry 변경과 `artifact_refs`를 기록한다.
+
+Test Run artifact 본문은 Artifact Store에 저장하고 `artifact_refs`가 `test_run_id`와 연결된다. 정확한 heartbeat 주기, network protocol, command policy와 artifact retention은 후속 설계다.
 
 ## 팀 Personal Node
 

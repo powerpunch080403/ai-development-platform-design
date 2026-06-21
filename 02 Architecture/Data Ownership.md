@@ -29,6 +29,8 @@
 | Artifact 참조와 로컬 Audit Event | Primary Personal Server SQLite |
 | 대형 로그, 아티팩트, 테스트 출력 | 파일 저장소 |
 | Artifact 파일 본문 | Artifact Store |
+| Test Runner Node, Test Run과 Worker Report | Local Runtime SQLite |
+| Remote Test Runner checkout | Runner의 임시 실행 복사본 |
 | UI Client 브라우저 상태 | 원본 아님 |
 | 개인 Node의 중앙 프로젝트 정보 | Personal Node 캐시 |
 | 코드, Commit, Branch와 Merge 이력 | Git |
@@ -49,6 +51,7 @@
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
+- [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 
 ## 원칙
 
@@ -62,10 +65,13 @@
 - 팀 모드의 중앙 account, Membership과 조직 권한은 Central Authority가 소유한다. 로컬 user·Session 기록과 중앙 account·Session 기록은 서로 다른 원본이다.
 - Owner Conversation, Message, Agent Run, Agent Run Step, Tool Call, 로컬 Approval interruption 상태, 개인 Memory, Worker Run과 Worker Lease/Claim 기록은 Personal Node SQLite가 소유한다.
 - 큰 로그와 산출물 파일은 Artifact Store가 소유하고 SQLite는 `artifact_ref`를 소유한다.
+- Remote Test Runner는 artifact의 장기 원본을 소유하지 않는다. 산출물은 Main App Artifact Store로 업로드하며 Local Runtime SQLite가 `test_runner_nodes`, `test_runs`, `worker_reports`와 `artifact_refs`를 소유한다.
+- Git repository가 source의 원본이며 Runner checkout은 폐기 가능한 임시 실행 복사본이다.
 - 개인 Owner Grant, 개인 자율성 설정, 개인 프로젝트의 Approval Request와 결과, 로컬 감사 기록은 Local Control Plane 또는 Personal Node가 소유한다.
 - 팀 프로젝트의 공식 Task, Change Package, Decision과 Approval 결과는 중앙 Authority가 소유할 수 있다.
 - 팀 프로젝트 Approval Policy, Approval Group, 팀 공식 Approval Request와 결과, 공식 Grant 또는 중앙 위임, 팀 감사 기록은 중앙 Authority가 소유한다.
 - 팀 공식 상태 변경, 중앙 Merge Queue와 공식 merge 기록은 Central Authority PostgreSQL이 소유한다.
+- 팀 공유 Test Runner Pool의 공식 등록·권한·사용량 기록과 Personal Node의 로컬 Test Run 기록은 서로 다른 원본이다.
 - 로컬 기록과 중앙 기록은 `correlation_id`, `central_request_id`, `agent_run_id`, `task_attempt_id` 또는 `change_package_id` 같은 연결 식별자로 추적한다.
 - Personal Node의 팀 승인 데이터는 캐시 또는 실행 재개 상태이며 공식 원본이 아니다.
 - 코드, Commit, Branch와 Merge 이력은 Git이 소유한다. SQLite의 Git 관련 엔티티는 실행 복구와 감사에 필요한 참조이며 Git 객체와 이력의 원본을 대체하지 않는다.
