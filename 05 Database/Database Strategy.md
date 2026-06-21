@@ -4,6 +4,7 @@
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 
 ## 개인 모드
 
@@ -21,6 +22,14 @@ SQLite를 사용한다.
 - run_checkpoints
 - owner_memories
 - pending_approvals
+- autonomy_profiles
+- owner_grants
+- approval_requests
+- approval_decisions
+- policy_evaluations
+- grant_revocations
+- security_audit_events
+- budget_usage
 - runtime_events
 - Work Item
 - Task
@@ -31,6 +40,8 @@ SQLite를 사용한다.
 - 설정
 
 개인 모드에서는 Local Control Plane이 한 사용자 중심의 로컬 데이터 저장소를 관리한다.
+
+개인 프로젝트의 Approval Request와 결과, 개인 Owner Grant, 개인 자율성 설정, 로컬 감사 기록은 SQLite가 공식 원본이다.
 
 ## 팀 Personal Node
 
@@ -48,6 +59,14 @@ SQLite를 사용한다.
 - run_checkpoints
 - owner_memories
 - pending_approvals
+- autonomy_profiles
+- owner_grants
+- approval_requests
+- approval_decisions
+- policy_evaluations
+- grant_revocations
+- security_audit_events
+- budget_usage
 - runtime_events
 - 로컬 Worker 실행
 - Inbox와 Outbox
@@ -58,6 +77,8 @@ SQLite를 사용한다.
 Personal Node의 SQLite는 중앙 프로젝트 정보 일부를 캐시할 수 있지만, 중앙 Authority DB의 복제본이나 동등한 Writer가 아니다.
 
 Owner Runtime 관련 테이블의 구체적인 최종 스키마, 인덱스, 보존 정책, 상태 전이 제약은 후속 설계로 남긴다.
+
+팀 프로젝트의 승인 데이터가 Personal Node SQLite에 있을 때는 표시, 오프라인 작업, Agent Run 재개를 위한 캐시 또는 대기 상태다. 팀 공식 승인 원본은 아니다.
 
 ## 팀 Central Authority
 
@@ -71,8 +92,19 @@ PostgreSQL을 사용한다.
 - Scope Lock
 - Change Package
 - Approval Policy
+- Approval Group
+- Approval Request와 Approval Decision
+- 공식 Grant 또는 중앙 위임
+- Policy Evaluation
+- Grant Revocation
+- Security Audit Event
+- Budget Usage
 - Merge Queue
 - Audit Event
+
+팀 프로젝트 Approval Policy, Approval Group, 팀 공식 Approval Request와 결과, 공식 Grant 또는 중앙 위임, 팀 감사 기록은 PostgreSQL이 공식 원본이다.
+
+구체적인 최종 스키마는 후속 설계로 남긴다.
 
 ## 금지
 

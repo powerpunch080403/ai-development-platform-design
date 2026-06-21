@@ -18,6 +18,7 @@ updated: 2026-06-21
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 
 ## 사용자 경험
 
@@ -28,6 +29,10 @@ updated: 2026-06-21
 - Owner가 계획, 작업 분해, Worker 선택, 결과 검토와 재시도를 담당한다.
 - 프로젝트 방향은 대화로 결정한다.
 - 개인 서버 또는 연결된 장치 연결, 비밀 접근, 권한 상승, 위험 명령과 병합은 승인 UI로 처리한다.
+- 기본값은 사용자 승인과 최소 권한이다.
+- 사용자는 범위가 제한된 Owner 자율 권한을 선택할 수 있다.
+- 팀 정책과 다른 사용자의 권한은 개인 Grant로 우회할 수 없다.
+- 고위험 작업은 위험 기반 승인 UI에서 대상, 범위, 위험, 되돌리기 가능성을 확인한다.
 
 ## 모드
 

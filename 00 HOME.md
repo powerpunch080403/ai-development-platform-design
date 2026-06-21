@@ -17,6 +17,7 @@
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[10 Open Questions/Open Questions]]

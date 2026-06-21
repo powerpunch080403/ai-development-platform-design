@@ -4,6 +4,7 @@
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 
 ## App Client
 
@@ -137,6 +138,50 @@ Owner Runtime이 특정 AI 공급자나 모델에 결합하지 않도록 하는 
 
 승인 또는 거부 후 같은 Run을 이어서 실행한다.
 
+## Risk Level
+
+Tool Call 또는 Action의 위험 등급. 초기 등급은 R0 관찰, R1 로컬·가역 변경, R2 공유 프로젝트 변경 제안, R3 고영향 행동, R4 치명적·보안 관리 행동이다.
+
+수치 임계값은 아직 확정하지 않는다.
+
+## Autonomy Profile
+
+사용자가 Owner 자율성 기본값을 고르는 정책 템플릿. Confirm Every Change, Allow Local Work, Trusted Owner, Autonomous를 제공한다.
+
+프로필은 편의를 위한 템플릿이며 실제 권한은 Owner Grant로 표현한다.
+
+## Owner Grant
+
+사용자가 Owner에게 위임한 범위 있는 권한. allowed_actions, allowed_tools, allowed_scopes, allowed_environments, maximum_risk_level, budget_limit, valid_from, expires_at, allow_background_execution, allow_external_network, allow_secret_use 등을 가질 수 있다.
+
+Owner는 Grant를 생성, 확대, 연장하거나 취소 철회 상태를 변경할 수 없다.
+
+## Approval Request
+
+승인이 필요한 Action에 대해 생성되는 요청 기록. 요청한 행동, 대상 프로젝트와 환경, 대상 리소스, 변경 범위 요약, 위험 등급, 위험 산정 이유, 예상 영향, 되돌리기 방법, 비용 또는 외부 영향, 사용될 권한, 요청 시점의 대상 버전, 만료 시각, 승인 가능한 사용자 또는 Approval Group을 포함한다.
+
+팀 공식 Approval Request의 원본은 중앙 Authority가 소유한다.
+
+## Approval Decision
+
+Approval Request에 대한 허용 또는 거부 기록. 누가 승인 또는 거부했는지, 어떤 Grant와 정책이 적용됐는지, 어떤 대상 버전에 대해 유효한지 추적한다.
+
+## Stale Approval
+
+승인 후 Tool arguments, 대상 파일 또는 리소스, 기준 commit, 배포 환경, 예상 비용, 위험 등급, Approval Policy, 승인 대상 버전, 실행 권한이 바뀌어 더 이상 사용할 수 없는 승인 상태.
+
+## Policy Engine
+
+행동 종류, 변경 대상, 변경 범위, 실행 환경, 보안 영향, 데이터 손실 가능성, 비용, 외부 시스템 영향, 프로젝트 정책, Owner Grant, Run 권한과 Tool 권한을 조합해 최종 위험도와 승인 필요 여부를 계산하는 구성 요소.
+
+Owner 또는 Tool 구현이 위험도를 낮춰 보고할 수 없도록 최종 판단은 Policy Engine이 수행한다.
+
+## Emergency Stop
+
+사용자가 현재 Agent Run 취소, 새 Tool Call 차단, Worker 실행 중지 요청, Owner Grant 철회, Autonomous 모드 해제, Personal Node 연결 해제를 수행하는 긴급 제어 기능.
+
+이미 완료된 외부 부작용은 단순 취소로 되돌아가지 않을 수 있으므로 보상 또는 복구 절차가 별도로 필요하다.
+
 ## Worker Supervisor
 
 Owner가 만든 Task Attempt를 실행할 Worker를 준비하고 실행 상태, 로그, 실패, 아티팩트를 관리하는 로컬 실행 관리자. 사용자는 Worker를 직접 조작하지 않는다.
@@ -217,7 +262,7 @@ Task의 실제 한 번의 실행. 재시도할 때 기존 기록을 덮어쓰지
 
 변경 파일 경로, 영향받는 영역, Task 종류, 보안 변경, 권한 상승, 데이터 손실 가능성, 비밀정보 접근, 외부 배포, 유료 API 사용, 변경 규모, 테스트 결과 등을 기준으로 필요한 승인과 테스트를 계산하는 정책.
 
-정책 결과는 필수 테스트, Approval Group 승인 수, 사용자 명시적 승인, Owner 자동 승인 허용 여부, Merge Queue 사용 여부 등을 포함할 수 있다. 구체적인 위험도 단계와 승인 인원 수는 아직 확정하지 않는다.
+정책 결과는 필수 테스트, Approval Group 승인 수, 사용자 명시적 승인, Owner 자동 승인 허용 여부, Merge Queue 사용 여부 등을 포함할 수 있다. 위험 등급 R0~R4는 [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]에서 정의한다. 구체적인 정량 임계값과 승인 인원 수는 아직 확정하지 않는다.
 
 ## Decision Proposal
 

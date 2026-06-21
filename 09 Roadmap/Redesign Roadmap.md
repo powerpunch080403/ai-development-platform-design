@@ -4,6 +4,7 @@
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 
 ## Phase 0: 설계 저장소
 
@@ -56,6 +57,20 @@
 - 팀 프로젝트는 Personal Node와 중앙 Authority에 연결
 - 팀 전용 기능 숨김과 비활성화
 - 승인 UI
+- 자율성 프로필 선택
+
+## Phase 5A: Autonomy and Approval Policy
+
+- Tool Registry와 권한 선언
+- Policy Engine
+- R0~R4 위험도 계산
+- Approval Request와 Decision
+- Owner Grant
+- 자율성 프로필
+- stale 승인 처리
+- 긴급 중단과 권한 철회
+- 감사 이벤트
+- Budget 제한
 
 ## Phase 6: 중앙 Authority와 PostgreSQL
 

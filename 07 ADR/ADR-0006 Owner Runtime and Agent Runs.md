@@ -14,7 +14,7 @@ scope:
 
 ## 배경
 
-[[07 ADR/ADR-0002 Personal Owner]]는 각 사용자가 개인 Owner를 가진다고 결정했다. [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]는 Owner가 사용자별 Personal Node에서 실행된다고 결정했다.
+[[07 ADR/ADR-0002 Personal Owner]]는 각 사용자가 개인 Owner를 가진다고 결정했다. [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]는 Owner가 사용자별 Personal Node에서 실행된다고 결정했다. Owner 자율성과 위험 기반 승인 정책은 [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]에서 다룬다.
 
 이제 Owner Runtime 내부를 하나의 영구 LLM 세션으로 볼지, 요청별 실행 단위로 볼지, 승인 대기와 Worker 결과를 어떻게 복구 가능한 상태로 다룰지 결정해야 한다.
 
@@ -202,6 +202,8 @@ Tool Call 후보 필드:
 ## 승인 중단과 재개
 
 Tool Call이 Approval Policy에 의해 승인을 요구하면 Run을 실패 처리하지 않는다.
+
+승인 필요 여부, R0~R4 위험 등급, Owner Grant, stale 승인 처리는 [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]를 따른다.
 
 Run을 `waiting_for_approval` 상태로 전환하고 다음 정보를 저장한다.
 
@@ -419,4 +421,4 @@ Owner Runtime은 UI에 실행 진행 상황을 이벤트로 전달한다.
 - SSE와 WebSocket 선택
 - Durable Workflow 엔진 도입 시점 재검토
 - Run 동시성 제한 정의
-- Owner 자동 병합과 완전 자동 실행 범위 정의
+- Owner 자동 병합의 구체적인 UI와 운영 절차 정의

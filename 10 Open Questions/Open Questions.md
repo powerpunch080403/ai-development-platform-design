@@ -25,12 +25,19 @@
 - Agent Run 상태는 저장 및 재개 가능하다.
 - Conversation과 Agent Run은 분리한다.
 - Run State와 장기 Memory는 분리한다.
+- Owner 자동 실행의 기본값은 사용자 승인과 최소 권한이다.
+- 범위가 제한된 Grant를 통해 R0~R3 작업 자동 실행이 가능하다.
+- Autonomous 프로필을 제공한다.
+- R4 작업은 자동 실행할 수 없다.
+- 팀 정책과 다른 사용자의 권한은 개인 Grant로 우회할 수 없다.
+- Owner는 자신의 권한을 확대할 수 없다.
 
 관련 문서:
 
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 
 ## 우선 답할 질문
 
@@ -42,7 +49,12 @@
 6. SSE와 WebSocket 중 무엇을 사용할 것인가?
 7. Durable Workflow 엔진 도입 시점은 언제인가?
 8. Run 동시성 제한은 무엇인가?
-9. Owner 자동 병합과 완전 자동 실행의 허용 범위는 어디까지인가?
-10. Approval Policy의 위험도 단계, 승인 인원 수, 승격 규칙은 어떻게 정의할 것인가?
-11. 데스크톱 앱 포장 방식과 프론트엔드 세부 기술은 무엇인가?
-12. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?
+9. 각 위험 등급의 정량 임계값은 무엇인가?
+10. 비용 예산의 단위와 기본값은 무엇인가?
+11. 재인증이 필요한 Action 목록은 무엇인가?
+12. 팀 다중 승인 수와 승격 규칙은 어떻게 정의할 것인가?
+13. 보호 영역을 정의하는 UI와 파일 형식은 무엇인가?
+14. Emergency Stop의 프로세스 종료 범위는 어디까지인가?
+15. 권한 철회와 이미 실행 중인 Tool Call의 경합은 어떻게 처리할 것인가?
+16. 데스크톱 앱 포장 방식과 프론트엔드 세부 기술은 무엇인가?
+17. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?
