@@ -1,6 +1,9 @@
 # Database Strategy
 
-관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+관련 결정:
+
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+- [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 
 ## 개인 모드
 
@@ -10,6 +13,15 @@ SQLite를 사용한다.
 
 - Owner 대화
 - 개인 메모리
+- owner_conversations
+- owner_messages
+- agent_runs
+- agent_run_steps
+- tool_calls
+- run_checkpoints
+- owner_memories
+- pending_approvals
+- runtime_events
 - Work Item
 - Task
 - Task Attempt
@@ -28,6 +40,15 @@ SQLite를 사용한다.
 
 - Owner 대화
 - 개인 메모리
+- owner_conversations
+- owner_messages
+- agent_runs
+- agent_run_steps
+- tool_calls
+- run_checkpoints
+- owner_memories
+- pending_approvals
+- runtime_events
 - 로컬 Worker 실행
 - Inbox와 Outbox
 - 오프라인 작업
@@ -35,6 +56,8 @@ SQLite를 사용한다.
 - 제출 전 Change Package
 
 Personal Node의 SQLite는 중앙 프로젝트 정보 일부를 캐시할 수 있지만, 중앙 Authority DB의 복제본이나 동등한 Writer가 아니다.
+
+Owner Runtime 관련 테이블의 구체적인 최종 스키마, 인덱스, 보존 정책, 상태 전이 제약은 후속 설계로 남긴다.
 
 ## 팀 Central Authority
 

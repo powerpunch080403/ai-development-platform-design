@@ -1,6 +1,9 @@
 # Domain Model
 
-관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+관련 결정:
+
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+- [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 
 ## App Client
 
@@ -20,7 +23,7 @@
 
 ## Personal Node
 
-사용자별 실행 환경. Owner Runtime, Worker Supervisor, Local Git Workspace, 로컬 SQLite, Inbox/Outbox, 로컬 실행 로그와 오프라인 작업 상태를 포함할 수 있다.
+사용자별 실행 환경. Owner Supervisor, Conversation Store, Agent Run Engine, Worker Supervisor, Local Git Workspace, 로컬 SQLite, Inbox/Outbox, 로컬 실행 로그와 오프라인 작업 상태를 포함할 수 있다.
 
 팀 모드의 Personal Node는 중앙 Authority와 연결되지만 중앙 DB의 복제본이나 동등한 Writer가 아니다.
 
@@ -44,9 +47,95 @@
 
 ## Owner Runtime
 
-사용자별 Personal Node에서 실행되는 Owner의 실행 환경. 사용자의 대화, 계획, 작업 분해, Worker 선택, 결과 검토와 재시도 조정을 담당한다.
+사용자별 Personal Node에서 실행되는 Owner 실행 시스템. 하나의 영구 LLM 세션이나 하나의 무한 실행 프로세스가 아니라 Owner Supervisor, Conversation, Agent Run, Agent Run Step, Tool Call, Approval Interruption, Memory, Model Provider Adapter, Event Stream으로 구성된다.
 
-Owner Runtime 내부 구조는 아직 확정하지 않는다.
+## Owner Supervisor
+
+Personal Node에서 실행되는 장기 서비스. 사용자 요청 수신, Conversation 관리, Agent Run 생성, 실행 Queue 관리, Run 중단·재개·취소·재시도, Approval 대기 관리, Worker 작업 제출과 결과 대기, 오류 복구, 진행 이벤트 발행, 모델과 도구 정책 적용을 담당한다.
+
+Owner Supervisor 자체는 하나의 계속 이어지는 AI 대화가 아니다.
+
+## Conversation
+
+사용자와 개인 Owner 사이의 장기 대화 단위. 여러 Agent Run을 포함할 수 있으며 Message 기록과 Agent Run 실행 상태를 분리한다.
+
+후보 필드:
+
+- conversation_id
+- user_id
+- project_id
+- title
+- status
+- created_at
+- updated_at
+
+## Message
+
+Conversation에 속한 대화 메시지.
+
+후보 필드:
+
+- message_id
+- conversation_id
+- actor_type
+- actor_id
+- content
+- created_at
+- related_run_id
+- attachment_refs
+
+## Agent Run
+
+하나의 명확한 사용자 요청 또는 시스템 목적을 처리하는 제한된 실행 단위. Conversation 전체와 같지 않으며 고유한 입력, 상태, 권한, 모델 설정, 결과와 실행 이력을 가진다.
+
+상태 후보:
+
+- queued
+- preparing
+- running
+- waiting_for_approval
+- waiting_for_user
+- waiting_for_worker
+- retry_scheduled
+- completed
+- failed
+- cancelled
+
+구체적인 상태 전이 전체는 아직 확정하지 않는다.
+
+## Agent Run Step
+
+Agent Run을 구성하는 순서 있는 실행 단계. 예: context_load, model_call, tool_call, worker_dispatch, worker_result_review, approval_request, decision_record, final_response.
+
+Run 재개 시 이미 성공한 외부 작업을 무조건 다시 실행하지 않도록 Step 결과를 기록한다.
+
+## Tool Call
+
+등록된 Tool을 실행하는 기록 단위. LLM은 시스템 상태나 파일을 직접 임의 변경하지 않고, 외부 부작용은 Tool Call을 통해서만 실행한다.
+
+외부 상태를 변경하는 Tool Call에는 idempotency key를 사용한다.
+
+## Run State
+
+현재 Agent Run을 재개하기 위한 실행 상태. 현재 Step, Tool Call 결과, Approval 상태, Worker 대기 상태, 일시적인 작업 Context를 포함한다.
+
+Conversation History 및 Long-term Memory와 분리한다.
+
+## Context Builder
+
+Agent Run 시작 시 필요한 정보만 조합하는 구성 요소. 현재 사용자 요청, 최근 관련 메시지, 프로젝트 공식 결정, 관련 Work Item과 Task, 필요한 코드 또는 문서 요약, 사용자 및 프로젝트 Memory, 사용 가능한 Tool, 현재 권한 정책을 선택해 모델 입력을 만든다.
+
+## Model Provider Adapter
+
+Owner Runtime이 특정 AI 공급자나 모델에 결합하지 않도록 하는 교체 경계. Run마다 provider, model, prompt_version, tool_definition_version, runtime_version을 기록한다.
+
+구체적인 모델 선택 및 fallback 정책은 아직 확정하지 않는다.
+
+## Approval Interruption
+
+민감 Tool Call이 승인을 요구할 때 Agent Run을 실패시키지 않고 대기 상태로 전환하는 중단 기록. 승인 대상 Tool Call, 요청한 권한, 인수 요약, 위험도, 승인 만료 시각, 재개에 필요한 버전 정보를 저장한다.
+
+승인 또는 거부 후 같은 Run을 이어서 실행한다.
 
 ## Worker Supervisor
 

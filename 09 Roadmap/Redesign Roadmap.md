@@ -1,6 +1,9 @@
 # Redesign Roadmap
 
-관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+관련 결정:
+
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+- [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 
 ## Phase 0: 설계 저장소
 
@@ -26,14 +29,23 @@
 
 ## Phase 3: Owner Runtime과 Worker Supervisor
 
-- Owner Runtime
-- Worker Supervisor
-- 로컬 Worker 실행 로그
-- 아티팩트 관리
+- Conversation과 Message
+- Owner Supervisor
+- Agent Run 상태 머신
+- Tool Registry와 Tool Call
+- Approval interruption
+- Worker dispatch와 결과 재개
+- Context와 Memory
+- UI 이벤트 스트리밍
+- 실패 복구
+- Worker Supervisor와 로컬 Worker 실행 로그
 
 ## Phase 4: 개인 모드 SQLite
 
-- Owner 대화와 개인 메모리
+- owner_conversations, owner_messages
+- agent_runs, agent_run_steps, tool_calls
+- run_checkpoints, pending_approvals, runtime_events
+- owner_memories
 - Work Item, Task, Task Attempt
 - Worker 실행 기록
 - 로컬 Change Package와 설정

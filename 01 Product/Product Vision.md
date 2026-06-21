@@ -14,13 +14,17 @@ updated: 2026-06-21
 
 개인 프로젝트에서는 App UI가 Local Control Plane에 연결된다. 팀 프로젝트에서는 각 사용자의 Personal Node가 중앙 Authority 서버에 연결된다. 중앙 Authority는 공식 프로젝트 상태, 권한, 작업 소유권, 변경 패키지, 잠금과 Merge Queue를 관리한다.
 
-관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+관련 결정:
+
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+- [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 
 ## 사용자 경험
 
 - 사용자는 Worker를 직접 조작하지 않는다.
 - 사용자는 개인 Owner와 대화한다.
 - 개인 Owner는 사용자별 실행 서버에서 동작한다.
+- Owner는 단일 영구 AI 세션이 아니라 Owner Supervisor와 복구 가능한 Agent Run들로 구성된다.
 - Owner가 계획, 작업 분해, Worker 선택, 결과 검토와 재시도를 담당한다.
 - 프로젝트 방향은 대화로 결정한다.
 - 개인 서버 또는 연결된 장치 연결, 비밀 접근, 권한 상승, 위험 명령과 병합은 승인 UI로 처리한다.

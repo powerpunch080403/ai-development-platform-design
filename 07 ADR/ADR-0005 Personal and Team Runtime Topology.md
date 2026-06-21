@@ -249,6 +249,8 @@ Owner는 사용자별 Personal Node에서 실행한다.
 
 Worker는 사용자의 실행 환경에서 Worker Supervisor가 조정한다. 사용자는 Worker를 직접 조작하지 않는다.
 
+Owner Runtime의 내부 구조는 [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]에서 결정한다.
+
 ## 중앙 Authority의 역할
 
 중앙 Authority에는 초기 버전에서 필수 중앙 AI를 두지 않는다.
@@ -303,7 +305,7 @@ Personal Node가 중앙 Authority와 연결되지 않은 동안 가능한 작업
 ## 후속 과제
 
 - Node 등록과 인증 방식 정의
-- Owner Runtime 내부 구조 정의
+- 구체적인 Agent Run 상태 전이 정의
 - Owner 자동 병합과 완전 자동 실행 범위 정의
 - Approval Policy 위험도와 승인 수 정의
 - 데스크톱 앱 포장 방식 정의

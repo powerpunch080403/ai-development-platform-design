@@ -1,6 +1,9 @@
 # System Context
 
-관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+관련 결정:
+
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+- [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 
 ## 개인 모드
 
@@ -8,9 +11,13 @@
 flowchart LR
     User[User] --> UI[App UI]
     UI --> LCP[Local Control Plane]
-    LCP --> Owner[Owner Runtime]
-    LCP --> Supervisor[Worker Supervisor]
-    LCP --> SQLite[(SQLite)]
+    LCP --> OwnerSupervisor[Owner Supervisor]
+    OwnerSupervisor --> ConversationStore[Conversation Store]
+    OwnerSupervisor --> RunEngine[Agent Run Engine]
+    RunEngine --> Supervisor[Worker Supervisor]
+    LCP --> LocalSQLite[(SQLite)]
+    ConversationStore --> LocalSQLite
+    RunEngine --> LocalSQLite
     Supervisor --> Workspace[Local Git Workspace]
 ```
 
@@ -22,16 +29,22 @@ flowchart LR
 flowchart LR
     User[User] --> UI[App UI]
     UI --> Node[Personal Node]
-    Node --> Owner[Owner Runtime]
-    Node --> Supervisor[Worker Supervisor]
+    Node --> OwnerSupervisor[Owner Supervisor]
+    OwnerSupervisor --> ConversationStore[Conversation Store]
+    OwnerSupervisor --> RunEngine[Agent Run Engine]
+    RunEngine --> Supervisor[Worker Supervisor]
     Supervisor --> Workspace[Local Git Workspace]
-    Node --> SQLite[(Local SQLite)]
+    Node --> LocalSQLite[(Local SQLite)]
+    ConversationStore --> LocalSQLite
+    RunEngine --> LocalSQLite
     Node <--> Authority[Central Authority]
     Authority <--> Git[Git Remote]
     Authority --> PG[(PostgreSQL)]
 ```
 
 팀 모드에서는 각 사용자가 자신의 Personal Node를 가진다. 팀 프로젝트의 공식 공유 상태는 중앙 Authority가 관리한다.
+
+Owner Agent Run과 Worker 실행은 다른 생명주기를 가진다. Agent Run은 사용자 요청, 승인 대기, Worker 결과 대기와 재개를 관리하고, Worker Supervisor는 Task Attempt의 실제 실행과 로그, 아티팩트를 관리한다.
 
 ## 중앙 Authority 책임
 
@@ -46,6 +59,7 @@ flowchart LR
 ## 개인 Node 책임
 
 - 개인 Owner 대화와 메모리
+- Agent Run, Run Step, Tool Call과 승인 대기 상태
 - 로컬 Worker 실행
 - 로컬 Git Worktree와 테스트
 - Inbox/Outbox

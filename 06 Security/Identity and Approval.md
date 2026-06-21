@@ -1,6 +1,9 @@
 # Identity and Approval
 
-관련 결정: [[07 ADR/ADR-0004 Governance and Approval Policy]]
+관련 결정:
+
+- [[07 ADR/ADR-0004 Governance and Approval Policy]]
+- [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 
 ## 분리할 신원
 
@@ -9,6 +12,25 @@
 - Worker Identity: Node 내부 Worker 실행 신원
 
 토큰과 권한을 서로 공유하지 않는다.
+
+## Tool 실행 경계
+
+LLM은 등록된 Tool을 통해서만 외부 부작용을 실행한다. 파일, Git, 프로젝트 상태, Change Package, Decision Proposal, 승인 요청 같은 외부 상태 변경은 Tool Call 기록을 남긴다.
+
+각 Tool Call에는 다음을 기록한다.
+
+- 요청 주체
+- 실행 주체
+- tool_name
+- requested_permissions
+- approval_requirement
+- idempotency_key
+- 결과 또는 오류
+- provider, model, prompt_version, tool_definition_version, runtime_version
+
+민감 Tool은 Agent Run을 실패시키지 않고 승인 대기 상태로 중단한다. 사용자가 승인하면 동일 Run을 재개하고, 거부하면 거부 결과를 Owner에게 전달한다.
+
+승인 상태에는 비밀정보를 불필요하게 직렬화하지 않는다. 승인 UI에는 인수 요약, 요청 권한, 위험도, 만료 시각, 재개에 필요한 버전 정보만 보관한다.
 
 ## 권한 분리
 

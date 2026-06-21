@@ -28,4 +28,4 @@
 - 사용자 직접 Worker 조작 UX
 - 게임 전용 제품 명칭
 - 고정 Worker Role 목록
-- 동기식 Owner CLI 실행 API
+- 동기식 Owner CLI 실행 API. 채택하지 않는다. Owner Runtime은 [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]에 따라 장기 Supervisor와 재개 가능한 Agent Run으로 재설계한다.
