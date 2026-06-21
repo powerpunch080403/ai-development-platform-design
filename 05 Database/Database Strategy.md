@@ -1,39 +1,58 @@
 # Database Strategy
 
-## 중앙 Authority
+관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 
-PostgreSQL 우선.
+## 개인 모드
 
-- 여러 개인 Node의 동시 요청
-- Row Lock과 트랜잭션
-- 제약조건
-- 안정적인 마이그레이션과 백업
+SQLite를 사용한다.
 
-후보 테이블:
+저장 데이터:
 
-- workspaces, users, workspace_memberships
-- nodes, node_credentials
-- projects, project_memberships
-- work_items, tasks, task_attempts, task_dependencies
-- leases, scope_locks
-- change_packages, test_evidence
-- merge_queue_entries
-- decisions
-- approval_requests, approval_decisions
-- audit_events, outbox_events, processed_commands
+- Owner 대화
+- 개인 메모리
+- Work Item
+- Task
+- Task Attempt
+- Worker 실행
+- 승인
+- 로컬 Change Package
+- 설정
 
-## 개인 Node
+개인 모드에서는 Local Control Plane이 한 사용자 중심의 로컬 데이터 저장소를 관리한다.
 
-SQLite 우선.
+## 팀 Personal Node
 
-- owner_conversations, owner_messages, owner_memories
-- local_workers, local_worker_runs
-- pending_commands, inbox_events
-- cached_projects, cached_tasks
-- local_change_packages
+SQLite를 사용한다.
+
+저장 데이터:
+
+- Owner 대화
+- 개인 메모리
+- 로컬 Worker 실행
+- Inbox와 Outbox
+- 오프라인 작업
+- 중앙 상태 캐시
+- 제출 전 Change Package
+
+Personal Node의 SQLite는 중앙 프로젝트 정보 일부를 캐시할 수 있지만, 중앙 Authority DB의 복제본이나 동등한 Writer가 아니다.
+
+## 팀 Central Authority
+
+PostgreSQL을 사용한다.
+
+저장 데이터:
+
+- 공유 프로젝트 상태의 유일한 원본
+- 멤버십
+- Task Lease
+- Scope Lock
+- Change Package
+- Approval Policy
+- Merge Queue
+- Audit Event
 
 ## 금지
 
-- 중앙 SQLite를 네트워크 파일로 공유
+- SQLite 파일을 중앙 DB처럼 네트워크로 공유
 - 개인 Node가 중앙 DB에 직접 접속
-- 중앙/로컬 DB의 무분별한 양방향 복제
+- 개인 SQLite와 중앙 PostgreSQL의 양방향 테이블 복제

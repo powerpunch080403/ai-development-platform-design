@@ -1,5 +1,61 @@
 # Domain Model
 
+관련 결정: [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
+
+## App Client
+
+사용자가 보는 하나의 앱과 UI. 개인 프로젝트에서는 Local Control Plane에 연결하고, 팀 프로젝트에서는 Personal Node와 중앙 Authority에 연결한다.
+
+## Local Control Plane
+
+개인 모드에서 개인 프로젝트 상태를 관리하는 로컬 제어 계층.
+
+- Work Item과 Task 관리
+- Task Attempt 관리
+- Owner Runtime과 Worker Supervisor 조정
+- 로컬 승인
+- 로컬 병합
+- 실행 로그 관리
+- 실패 복구
+
+## Personal Node
+
+사용자별 실행 환경. Owner Runtime, Worker Supervisor, Local Git Workspace, 로컬 SQLite, Inbox/Outbox, 로컬 실행 로그와 오프라인 작업 상태를 포함할 수 있다.
+
+팀 모드의 Personal Node는 중앙 Authority와 연결되지만 중앙 DB의 복제본이나 동등한 Writer가 아니다.
+
+`Node`는 내부 시스템 용어다. 사용자 화면에서는 가능한 한 `개인 서버`, `실행 서버`, `연결된 장치`, `이 컴퓨터` 같은 표현을 사용한다.
+
+## Central Authority
+
+팀 프로젝트의 공식 공유 상태를 관리하는 중앙 권위 계층.
+
+- Project Membership
+- 공유 Work Item과 Task
+- Task Lease
+- Scope Lock
+- Approval Policy
+- Decision Proposal
+- Change Package
+- Merge Coordinator
+- Audit Event
+
+초기 버전에서 필수 중앙 AI를 두지 않는다.
+
+## Owner Runtime
+
+사용자별 Personal Node에서 실행되는 Owner의 실행 환경. 사용자의 대화, 계획, 작업 분해, Worker 선택, 결과 검토와 재시도 조정을 담당한다.
+
+Owner Runtime 내부 구조는 아직 확정하지 않는다.
+
+## Worker Supervisor
+
+Owner가 만든 Task Attempt를 실행할 Worker를 준비하고 실행 상태, 로그, 실패, 아티팩트를 관리하는 로컬 실행 관리자. 사용자는 Worker를 직접 조작하지 않는다.
+
+## Local Git Workspace
+
+개인 또는 팀 프로젝트 작업을 수행하는 로컬 Git 작업 공간. Worker 실행 결과와 테스트는 이 작업 공간에서 생성되며, 팀 모드에서는 제출 전 Change Package의 근거가 된다.
+
 ## Work Item
 
 사람과 Owner가 보는 계획 단위. 자유로운 부모·자식 관계와 kind를 가진다.

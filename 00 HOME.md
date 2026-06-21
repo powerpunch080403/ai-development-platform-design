@@ -2,7 +2,7 @@
 
 ## 제품 한 문장
 
-각 사용자가 자신의 개인 Owner AI와 Worker 환경을 운영하고, 중앙 Authority 서버가 여러 개인 서버의 프로젝트 변경을 조정하는 범용 AI 개발 플랫폼.
+하나의 앱에서 개인 모드와 팀 모드를 제공하고, 개인 실행 환경의 Owner AI와 Worker가 작업하며, 팀 프로젝트의 공식 공유 상태는 중앙 Authority가 조정하는 범용 AI 개발 플랫폼.
 
 ## 핵심 문서
 
@@ -15,6 +15,7 @@
 - [[06 Security/Identity and Approval]]
 - [[07 ADR/ADR-0001 Central Authority]]
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[10 Open Questions/Open Questions]]

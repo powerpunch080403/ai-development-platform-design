@@ -10,17 +10,27 @@
 - 의미상 충돌은 Decision Proposal과 정책 기반 절차로 처리한다.
 - Project Admin은 모든 기술 결정을 직접 내리는 역할이 아니다.
 - 개인 모드에서 Worker 결과의 최종 병합은 기본적으로 사용자 승인이고, Owner 자동 병합은 선택 설정이다.
+- 개인 모드와 팀 모드는 별개의 제품이 아니라 하나의 앱과 하나의 UI로 제공한다.
+- 개인 모드는 팀 모드 공통 핵심에서 팀 전용 기능을 제거하거나 숨긴 형태다.
+- 개인 모드에서는 중앙 Authority 없이 Local Control Plane, Owner Runtime, Worker Supervisor, SQLite, Local Git Workspace로 개인 프로젝트 작업을 수행한다.
+- 개인 프로젝트 상태는 Local Control Plane이 소유한다.
+- 팀 프로젝트의 공식 공유 상태는 중앙 Authority가 소유한다.
+- 개인 모드와 팀 Personal Node는 SQLite를 사용한다.
+- 팀 Central Authority는 PostgreSQL을 사용한다.
+- 팀 모드의 PostgreSQL은 중앙 Authority 도입 단계에서 사용한다.
+- Owner는 사용자별 Personal Node에서 실행한다.
+- 중앙 Authority에는 초기 버전에서 필수 중앙 AI를 두지 않는다.
 
-관련 문서: [[07 ADR/ADR-0004 Governance and Approval Policy]]
+관련 문서:
+
+- [[07 ADR/ADR-0004 Governance and Approval Policy]]
+- [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 
 ## 우선 답할 질문
 
-1. 개인 모드에서 Authority 없이 어느 범위까지 제공할 것인가?
-2. 개인 Node UI와 중앙 Authority UI를 하나의 앱으로 제공할 것인가?
-3. Node 등록에 공개키, mTLS, 장치 코드 중 무엇을 사용할 것인가?
-4. Owner Runtime은 장기 세션인가, 요청별 Agent Run인가?
-5. 기존 레포를 점진적으로 마이그레이션할지 v2를 새로 구성할지?
-6. 중앙 PostgreSQL 전환 시점은 언제인가?
-7. Frontend 프레임워크는 무엇으로 할 것인가?
-8. Approval Policy의 위험도 단계, 승인 인원 수, 승격 규칙은 어떻게 정의할 것인가?
-9. Owner 자동 병합과 완전 자동 실행의 허용 범위는 어디까지인가?
+1. Node 등록과 인증 방식은 무엇인가?
+2. Owner Runtime 내부 구조는 장기 세션인가, 요청별 Agent Run인가?
+3. Owner 자동 병합과 완전 자동 실행의 허용 범위는 어디까지인가?
+4. Approval Policy의 위험도 단계, 승인 인원 수, 승격 규칙은 어떻게 정의할 것인가?
+5. 데스크톱 앱 포장 방식과 프론트엔드 세부 기술은 무엇인가?
+6. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?

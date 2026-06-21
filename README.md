@@ -5,15 +5,15 @@
 ## 확정된 방향
 
 - 범용 AI 개발 플랫폼
-- 개인 모드와 팀 연합 모드
-- 사용자마다 개인 서버와 개인 Owner AI 보유
-- 여러 개인 서버가 중앙 Authority 서버에 연결
+- 개인 모드와 팀 모드는 하나의 제품과 하나의 앱으로 제공
+- 사용자마다 개인 실행 환경과 개인 Owner AI 보유
+- 팀 프로젝트에서는 여러 Personal Node가 중앙 Authority 서버에 연결
 - 사용자는 Worker를 직접 조작하지 않고 Owner와 대화
 - 중앙 서버는 공식 프로젝트 상태, 권한, 잠금, Change Package와 Merge Queue 관리
 - 중앙 AI는 초기 필수 요소가 아님
 - Discord 제거
 - 프로젝트 결정은 대화, 권한·보안 문제는 승인 버튼
-- 중앙 DB는 PostgreSQL, 개인 서버 로컬 DB는 SQLite 우선 검토
+- 팀 Central Authority는 PostgreSQL, 개인 모드와 팀 Personal Node는 SQLite 사용
 
 ## 시작
 
