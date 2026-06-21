@@ -6,6 +6,7 @@
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
+- [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 
 ## Phase 0 - Repository and Skeleton
 
@@ -35,8 +36,11 @@
 ## Phase 1 - Local Control Plane
 
 - 단일 로컬 사용자 자동 생성
-- 향후 가입 기능을 위한 user 모델 유지
+- local user와 nullable 중앙 account 연결 모델
 - 연결된 장치와 세션
+- Web UI 1회용 pairing code
+- Device와 Session 목록·폐기
+- opaque Session token과 token hash 저장
 - Project와 ProjectRepository 모델
 - 기존 Git 저장소 가져오기
 - 기본 API
@@ -47,6 +51,7 @@
 완료 조건:
 
 - 일회용 코드로 브라우저 세션을 연결할 수 있다.
+- Tailscale 없이 Local Runtime에 Web UI를 연결하고 Device·Session을 폐기할 수 있다.
 - 허용 프로젝트 루트 아래의 Git 저장소를 가져올 수 있다.
 
 주요 위험:
@@ -134,7 +139,7 @@
 완료 조건:
 
 - 브라우저 하나에서 프로젝트 가져오기, Owner 요청, 작업 진행, diff 검토, 승인까지 이어진다.
-- UI Client는 공식 상태 원본이 아니며 재접속 시 SQLite 상태로 복구된다.
+- UI Shell은 공식 상태 원본이 아니며 재접속 시 Local Runtime SQLite 상태로 복구된다.
 
 주요 위험:
 
@@ -163,7 +168,7 @@
 
 - SQLite 백업과 로그 보존 정책 미정
 - Windows Service 또는 사용자 세션 기반 실행 선택 지연
-- Tailscale 미구성 사용자의 초기 경험
+- pairing code와 Session 복구 UX 미완성
 
 ## Deferred
 
@@ -175,4 +180,8 @@
 - local IPC
 - OS keychain 연동
 - 자동 업데이트
+- 중앙 account 로그인과 다중 기기 동기화
+- Background Service 설치 방식
+- Tailscale 기반 원격 Node 연결
+- Remote Test Runner 상세 설계
 - macOS 공식 지원

@@ -8,6 +8,7 @@
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
+- [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 
 ## 개인 모드
 
@@ -15,9 +16,11 @@ SQLite를 사용한다.
 
 저장 데이터 후보:
 
-- users
-- user_devices
-- device_sessions
+- local_users
+- account_links
+- devices
+- sessions
+- pairing_codes
 - projects
 - project_repositories
 - project_settings
@@ -66,6 +69,10 @@ ProjectRepository, Work Item, Task, Task Attempt, Conversation, Agent Run과 Git
 `tool_calls`는 [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]의 공통 Envelope에 따라 Tool 이름과 버전, caller, 관련 도메인 ID, risk level, idempotency key, correlation ID, arguments, 상태, 결과·오류 참조와 시간을 추적한다. Approval Interruption은 Approval Request와 Agent Run의 대기 상태를 연결한다. 큰 Tool 결과와 실행 증거는 `artifact_refs`로 Artifact Store를 참조한다.
 
 상태 전이와 외부 부작용은 `runtime_events`와 `audit_events`에 기록한다. Tool Registry의 정확한 저장 방식, 전체 schema, index, lease timeout과 artifact 보존 정책은 후속 설계로 남긴다.
+
+`account_links`는 nullable 중앙 `account_id`와 link status를 local user에 연결한다. `devices`는 device type, name과 `last_seen_at`을, `sessions`는 `device_id`, `local_user_id`, nullable `account_id`, `token_hash`, `last_seen_at`, `idle_expires_at`, `absolute_expires_at`, `revoked_at`을 추적한다. `pairing_codes`에는 code 원문이 아니라 hash, 만료와 사용 시각을 저장한다.
+
+중앙 account 원본과 다중 기기 동기화는 Personal Mode MVP SQLite의 책임이 아니다. 동기화 schema, conflict resolution과 중앙 Session 모델은 후속 설계로 남긴다.
 
 ## 팀 Personal Node
 

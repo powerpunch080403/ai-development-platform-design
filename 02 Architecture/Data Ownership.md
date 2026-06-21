@@ -6,7 +6,9 @@
 | 개인 모드 MVP 실행 상태 | Primary Personal Server SQLite |
 | ProjectRepository 메타데이터 | Primary Personal Server SQLite |
 | Task와 Task Attempt 메타데이터 | Primary Personal Server SQLite |
-| 로컬 사용자와 장치 연결 정보 | Primary Personal Server SQLite |
+| local user, Device, Session | Local Runtime SQLite |
+| Pairing code hash와 Session token hash | Local Runtime SQLite |
+| nullable 중앙 account 연결 정보 | Local Runtime SQLite |
 | Workspace, 멤버십, 프로젝트 권한 | 중앙 Authority |
 | 공식 Work Item과 Task | 중앙 Authority |
 | Lease와 Lock | 중앙 Authority |
@@ -46,15 +48,18 @@
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
+- [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 
 ## 원칙
 
 - 개인 프로젝트 상태는 Local Control Plane이 소유한다.
 - 개인 모드 MVP의 공식 실행 상태, 사용자와 장치 연결 정보, ProjectRepository, Task Attempt, Worktree, Commit 참조, Merge Record, Artifact 참조와 Audit Event 메타데이터는 Primary Personal Server의 SQLite가 원본이다.
+- Local Runtime SQLite는 local user, Device, Session, pairing code hash, Session token hash와 nullable 중앙 `account_id` 연결 정보를 소유한다.
 - 대형 로그, 바이너리 아티팩트와 테스트 출력은 파일 저장소가 원본일 수 있으며 SQLite에는 참조를 저장할 수 있다.
 - 브라우저는 공식 상태의 원본이 아니다.
 - 운영체제는 데이터 소유권에 영향을 주지 않는다.
 - 팀 프로젝트의 공식 공유 상태는 중앙 Authority가 소유한다.
+- 팀 모드의 중앙 account, Membership과 조직 권한은 Central Authority가 소유한다. 로컬 user·Session 기록과 중앙 account·Session 기록은 서로 다른 원본이다.
 - Owner Conversation, Message, Agent Run, Agent Run Step, Tool Call, 로컬 Approval interruption 상태, 개인 Memory, Worker Run과 Worker Lease/Claim 기록은 Personal Node SQLite가 소유한다.
 - 큰 로그와 산출물 파일은 Artifact Store가 소유하고 SQLite는 `artifact_ref`를 소유한다.
 - 개인 Owner Grant, 개인 자율성 설정, 개인 프로젝트의 Approval Request와 결과, 로컬 감사 기록은 Local Control Plane 또는 Personal Node가 소유한다.

@@ -38,9 +38,9 @@
 - 개인 모드 MVP에서는 사용자 가입을 구현하지 않고 첫 설치 시 로컬 사용자 한 명을 자동 생성한다.
 - user 엔티티, user_id 참조, 장치와 사용자 관계, 프로젝트 소유권, 세션과 권한 구조는 유지한다.
 - 첫 구현 목표는 팀 모드가 아니라 개인 모드 MVP다.
-- 개인 모드 MVP는 Primary Personal Server 중심으로 배치한다.
+- 개인 모드 MVP는 앱이 관리하는 Local Runtime 중심으로 배치하며 `Primary Personal Server`는 내부 배치 용어로 사용할 수 있다.
 - 제품의 공식 장기 UI 목표는 Desktop App이며, 초기 MVP는 Desktop App Shell에 재사용 가능한 browser-accessible Web UI로 시작한다.
-- 개인 모드 MVP의 원격 접속은 Tailscale을 기본 전제로 한다.
+- Tailscale은 앱 접속의 기본 전제가 아니라 원격 실행 Node와 고급 네트워크 구성의 선택지다.
 - 기존 서버 Git 저장소 가져오기부터 구현한다.
 - Model Provider Adapter는 API와 CLI를 지원할 수 있게 설계하고 MVP는 CLI 우선이다.
 - 첫 Worker는 Generic Development Worker 하나다.
@@ -69,6 +69,15 @@
 - Worker lease/claim과 `artifact_refs`는 Personal Mode MVP에 포함한다.
 - Command Policy는 사용자나 조직이 실행 환경 경계를 표현하는 설정이다.
 - Personal Mode의 squash merge 승인은 Owner Grant와 Autonomy Profile로 평가하며 기본 `Allow Local Work`에서는 사용자 승인이 필요하다.
+- Personal Server는 별도 서버 제품이 아니라 앱이 관리하는 Local Runtime이다.
+- local user와 future central account는 분리하며 nullable account 연결을 허용한다.
+- MVP는 local user 자동 생성으로 시작하고 중앙 account 로그인과 회원가입은 후순위다.
+- 다중 기기 동기화는 장기 목표이며 MVP에서는 각 Device가 독립 Local Runtime을 가진다.
+- Device와 Session은 서로 다른 엔티티다.
+- Web UI는 10분 만료, 1회용 pairing code로 Local Runtime에 연결하는 것을 MVP 권장값으로 한다.
+- Session은 opaque random token을 사용하고 SQLite에는 token hash만 저장한다.
+- MVP는 Device·Session 목록과 개별·전체 폐기 기능을 포함한다.
+- Remote Test Runner 상세 설계는 ADR-0012로 분리한다.
 
 관련 문서:
 
@@ -79,6 +88,7 @@
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
+- [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 
 ## 우선 답할 질문
 
@@ -102,7 +112,7 @@
 18. macOS 공식 지원 시점은 언제인가?
 19. 첫 번째 실제 CLI Adapter 종류는 무엇인가?
 20. CLI별 구조화된 출력 방식은 무엇인가?
-21. 장치 토큰 형식과 만료 정책은 무엇인가?
+21. Session token refresh 정책과 권장 만료 기간의 최종 조정값은 무엇인가?
 22. 허용 프로젝트 루트의 운영체제별 기본 경로는 무엇인가?
 23. 브랜치와 Worktree 명명 규칙은 무엇인가?
 24. SQLite 백업 방식은 무엇인가?
@@ -130,3 +140,18 @@
 46. Enterprise command policy의 상세 규칙은 무엇인가?
 47. Golden Path의 최종 end-to-end 테스트 시나리오는 무엇인가?
 48. Central Authority와 Personal Node 사이의 정책 캐시·위임 모델은 무엇인가?
+49. 중앙 account 로그인 방식은 무엇인가?
+50. 회원가입, password와 OAuth 정책은 무엇인가?
+51. 다중 기기 동기화 모델과 sync-ready metadata는 무엇인가?
+52. 다중 기기 변경의 conflict resolution은 어떻게 처리하는가?
+53. pairing code의 정확한 UX와 표시 위치는 무엇인가?
+54. Device 정보와 접속 출처의 보존 기간은 얼마인가?
+55. 팀 중앙 account와 로컬 Session은 어떻게 연결하는가?
+56. Remote Test Runner를 Worker Tool 또는 Worker Capability로 모델링하는 상세 방식은 무엇인가?
+57. Worker가 Remote Test Runner를 호출하는 Tool Contract는 무엇인가?
+58. Tailscale 또는 다른 사설 네트워크 기반 원격 Node 연결 방식은 무엇인가?
+59. Test Runner 등록, 인증, 권한과 heartbeat는 어떻게 처리하는가?
+60. Test Runner 산출물을 Main App Artifact Store에 업로드하는 protocol은 무엇인가?
+61. Worker가 artifact를 분석해 Owner에게 보고하는 Worker Report 형식은 무엇인가?
+62. Owner가 `artifact_ref`로 원본 artifact를 열람하는 Tool은 무엇인가?
+63. Worker가 테스트 설정을 변경해 재시도할 수 있는 범위는 어디까지인가?
