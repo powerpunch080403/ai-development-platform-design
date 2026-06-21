@@ -14,6 +14,7 @@
 - [[05 Database/Database Strategy]]
 - [[06 Security/Identity and Approval]]
 - [[07 ADR/ADR-0001 Central Authority]]
+- [[07 ADR/ADR-0004 Governance and Approval Policy]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[10 Open Questions/Open Questions]]
