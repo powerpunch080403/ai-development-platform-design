@@ -4,6 +4,7 @@
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
+- [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 
 ## Phase 0 - Repository and Skeleton
 
@@ -33,7 +34,7 @@
 - 단일 로컬 사용자 자동 생성
 - 향후 가입 기능을 위한 user 모델 유지
 - 연결된 장치와 세션
-- 프로젝트 모델
+- Project와 ProjectRepository 모델
 - 기존 Git 저장소 가져오기
 - 기본 API
 - 이벤트와 감사 기록
@@ -76,6 +77,8 @@
 - Task와 Task Attempt
 - Worker Supervisor
 - Git Worktree
+- repository별 dirty check
+- 작업 브랜치 자동 commit
 - Windows와 Linux Worktree 테스트
 - 안전한 명령 실행
 - 테스트와 Diff 증거
@@ -97,7 +100,7 @@
 - Allow Local Work
 - Approval UI
 - Owner Grant
-- 로컬 병합
+- Owner 검토와 squash merge
 - stale 승인
 
 완료 조건:

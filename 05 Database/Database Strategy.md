@@ -6,6 +6,7 @@
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
+- [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 
 ## 개인 모드
 
@@ -13,13 +14,14 @@ SQLite를 사용한다.
 
 저장 데이터 후보:
 
-- local_users
-- connected_devices
+- users
+- user_devices
 - device_sessions
 - projects
+- project_repositories
 - project_settings
-- owner_conversations
-- owner_messages
+- conversations
+- messages
 - agent_runs
 - agent_run_steps
 - tool_calls
@@ -40,9 +42,13 @@ SQLite를 사용한다.
 - budget_usage
 - runtime_events
 - git_worktrees
+- branch_refs
+- commit_refs
+- merge_records
 - artifact_refs
 - local_change_packages
 - app_settings
+- audit_events
 
 개인 모드에서는 Local Control Plane이 한 사용자 중심의 로컬 데이터 저장소를 관리한다.
 
@@ -50,7 +56,7 @@ SQLite를 사용한다.
 
 개인 모드 MVP의 SQLite 데이터 경로는 운영체제별 기본 데이터 경로 Resolver와 설정으로 정한다. `/home/...`, `/var/...`, `C:\Users\...`, `C:\ProgramData\...` 같은 경로를 코드에 고정하지 않는다.
 
-구체적인 전체 스키마와 인덱스는 후속 데이터 모델 설계로 남긴다.
+ProjectRepository, Work Item, Task, Task Attempt, Conversation, Agent Run과 Git 메타데이터의 관계, 상태 전이와 무결성 규칙은 [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]을 따른다. 구체적인 전체 스키마, 타입, 인덱스와 DDL은 후속 데이터 모델 설계로 남긴다.
 
 ## 팀 Personal Node
 

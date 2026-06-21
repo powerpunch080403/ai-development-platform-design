@@ -22,6 +22,7 @@
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
+- [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]

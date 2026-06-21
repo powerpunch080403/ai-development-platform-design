@@ -5,6 +5,7 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
+- [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 
 ## 개인 모드
 
@@ -29,6 +30,12 @@ flowchart LR
 ```
 
 개인 모드에서는 Local Control Plane이 개인 프로젝트 상태, Work Item, Task, Task Attempt, 로컬 승인, 로컬 병합, 실행 로그와 실패 복구를 관리한다. 별도의 중앙 Authority 서버는 필요하지 않다.
+
+Project는 여러 ProjectRepository를 가질 수 있다. Personal Mode MVP의 작업 실행은 primary repository 중심으로 시작하지만, 공통 도메인 모델은 multi-repository project를 막지 않는다. cross-repository atomic merge와 multi-repo merge orchestration은 MVP 범위가 아니다.
+
+Owner LLM은 SQLite, Git, 파일시스템 또는 Worker를 직접 조작하지 않는다. 모든 관찰과 변경은 Local Control Plane이 제공하는 Tool Call을 통하며, 실행 전에 Owner Grant와 Approval Policy를 평가하고 실행 후 Runtime Event와 Audit Event를 남긴다.
+
+Worker는 Owner가 만든 repository-scoped Task만 격리된 Worktree에서 실행한다. 작업 브랜치에 결과를 자동 commit하지만 기본 브랜치에 직접 병합하지 않는다. Owner 검토와 승인 정책을 통과하고 사용자가 승인한 결과만 squash merge한다.
 
 Primary Personal Server Runtime은 Windows와 Linux 지원을 목표로 설계한다. 첫 개발, 통합 테스트와 실제 운영 기준 환경은 Ubuntu reference environment다.
 
