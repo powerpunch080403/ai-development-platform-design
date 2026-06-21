@@ -137,7 +137,7 @@ Owner LLM
 Personal Mode MVP의 SQLite 핵심 엔티티 후보는 다음과 같다. 실제 이름, 컬럼 타입, 인덱스와 DDL은 후속 설계로 남긴다.
 
 | 영역 | 엔티티 후보 | 책임 |
-|---|---|---|
+| --- | --- | --- |
 | 사용자와 장치 | `users`, `user_devices` | 로컬 사용자와 연결 장치 관계 |
 | 프로젝트 | `projects`, `project_repositories` | Project와 Git Repository 메타데이터 |
 | 대화와 실행 | `conversations`, `messages`, `agent_runs`, `agent_run_steps`, `tool_calls` | 대화 기록과 복구 가능한 Owner 실행 |
@@ -432,4 +432,3 @@ User = Personal Mode MVP 기본 브랜치 반영 최종 승인자
 - [[05 Database/Database Strategy]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[10 Open Questions/Open Questions]]
-
