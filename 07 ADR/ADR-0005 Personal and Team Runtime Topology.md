@@ -167,11 +167,11 @@ flowchart LR
 - SQLite
 - Git Workspace
 
-## 원격 개인 서버 실행
+## 원격 Primary Personal Server 실행
 
 사용자 노트북은 UI Client 역할을 할 수 있다.
 
-개인 Ubuntu 서버 또는 다른 실행 컴퓨터에서 다음을 실행할 수 있다.
+Primary Personal Server 또는 다른 실행 컴퓨터에서 다음을 실행할 수 있다.
 
 - Local Control Plane
 - Owner Runtime
@@ -187,6 +187,8 @@ flowchart LR
 - 연결된 장치
 
 내부 도메인과 API에서는 `Node`라는 용어를 사용할 수 있다.
+
+개인 모드 MVP의 범위, 웹 UI 우선 배치, Tailscale 전제, CLI-first Adapter, Generic Development Worker, 운영체제 지원과 배포 기준은 [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]에서 다룬다.
 
 ## 데이터 소유권
 
@@ -293,7 +295,7 @@ Personal Node가 중앙 Authority와 연결되지 않은 동안 가능한 작업
 - 개인 사용자는 중앙 Authority 없이 시작할 수 있다.
 - 팀 프로젝트의 공식 공유 상태는 중앙 Authority가 일관되게 관리한다.
 - Personal Node와 중앙 Authority의 데이터 소유권 경계를 명확히 한다.
-- 로컬 실행과 원격 개인 서버 실행을 같은 도메인 모델로 설명할 수 있다.
+- 로컬 실행과 원격 Primary Personal Server 실행을 같은 도메인 모델로 설명할 수 있다.
 
 ## 단점
 

@@ -14,7 +14,7 @@ scope:
 
 ## 배경
 
-[[07 ADR/ADR-0002 Personal Owner]]는 각 사용자가 개인 Owner를 가진다고 결정했다. [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]는 Owner가 사용자별 Personal Node에서 실행된다고 결정했다. Owner 자율성과 위험 기반 승인 정책은 [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]에서 다룬다.
+[[07 ADR/ADR-0002 Personal Owner]]는 각 사용자가 개인 Owner를 가진다고 결정했다. [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]는 Owner가 사용자별 Personal Node에서 실행된다고 결정했다. Owner 자율성과 위험 기반 승인 정책은 [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]에서 다룬다. 개인 모드 MVP의 CLI-first Model Provider Adapter와 백그라운드 실행 범위는 [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]에서 구체화한다.
 
 이제 Owner Runtime 내부를 하나의 영구 LLM 세션으로 볼지, 요청별 실행 단위로 볼지, 승인 대기와 Worker 결과를 어떻게 복구 가능한 상태로 다룰지 결정해야 한다.
 

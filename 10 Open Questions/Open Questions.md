@@ -31,6 +31,22 @@
 - R4 작업은 자동 실행할 수 없다.
 - 팀 정책과 다른 사용자의 권한은 개인 Grant로 우회할 수 없다.
 - Owner는 자신의 권한을 확대할 수 없다.
+- 개인 모드 MVP는 단일 Ubuntu 배포 대상으로 한정하지 않는다.
+- Primary Personal Server Runtime은 Windows와 Linux 지원을 목표로 한다.
+- Ubuntu Linux는 초기 구현과 검증을 위한 Ubuntu reference environment다.
+- macOS는 첫 MVP의 공식 지원 범위에 포함하지 않는다.
+- 개인 모드 MVP에서는 사용자 가입을 구현하지 않고 첫 설치 시 로컬 사용자 한 명을 자동 생성한다.
+- user 엔티티, user_id 참조, 장치와 사용자 관계, 프로젝트 소유권, 세션과 권한 구조는 유지한다.
+- 첫 구현 목표는 팀 모드가 아니라 개인 모드 MVP다.
+- 개인 모드 MVP는 Primary Personal Server 중심으로 배치한다.
+- 첫 UI는 설치형 데스크톱 앱이 아니라 브라우저 웹 UI다.
+- 개인 모드 MVP의 원격 접속은 Tailscale을 기본 전제로 한다.
+- 기존 서버 Git 저장소 가져오기부터 구현한다.
+- Model Provider Adapter는 API와 CLI를 지원할 수 있게 설계하고 MVP는 CLI 우선이다.
+- 첫 Worker는 Generic Development Worker 하나다.
+- Worker는 격리된 Git Worktree 안에서 기본 자동 작업할 수 있다.
+- 기본 브랜치 병합 전에는 사용자 승인이 필요하다.
+- 프로젝트별 자율성 설정이 가능하다.
 
 관련 문서:
 
@@ -38,6 +54,7 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## 우선 답할 질문
 
@@ -56,5 +73,21 @@
 13. 보호 영역을 정의하는 UI와 파일 형식은 무엇인가?
 14. Emergency Stop의 프로세스 종료 범위는 어디까지인가?
 15. 권한 철회와 이미 실행 중인 Tool Call의 경합은 어떻게 처리할 것인가?
-16. 데스크톱 앱 포장 방식과 프론트엔드 세부 기술은 무엇인가?
-17. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?
+16. Linux systemd 서비스 설치 방식은 어떻게 정의할 것인가?
+17. Windows Service와 사용자 세션 기반 백그라운드 실행 중 무엇을 우선할 것인가?
+18. 운영체제별 기본 데이터 경로 Resolver는 어떻게 정의할 것인가?
+19. macOS 공식 지원 시점은 언제인가?
+20. 첫 번째 실제 CLI Adapter 종류는 무엇인가?
+21. CLI별 구조화된 출력 방식은 무엇인가?
+22. 장치 토큰 형식과 만료 정책은 무엇인가?
+23. 허용 프로젝트 루트의 운영체제별 기본 경로는 무엇인가?
+24. 브랜치와 Worktree 명명 규칙은 무엇인가?
+25. Git commit을 기본 자동 허용할지 후보 상태로만 둘지?
+26. 병합 방식은 merge, squash, rebase 중 무엇인가?
+27. SQLite 백업 방식은 무엇인가?
+28. 로그와 아티팩트 보존 기간은 무엇인가?
+29. Emergency Stop의 정확한 종료 범위는 어디까지인가?
+30. 추가 Worker Host를 도입할 시점은 언제인가?
+31. 자동 업데이트 방식은 무엇인가?
+32. 데스크톱 앱 포장 방식과 프론트엔드 세부 기술은 무엇인가?
+33. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?

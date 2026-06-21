@@ -5,10 +5,19 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## App Client
 
 사용자가 보는 하나의 앱과 UI. 개인 프로젝트에서는 Local Control Plane에 연결하고, 팀 프로젝트에서는 Personal Node와 중앙 Authority에 연결한다.
+
+개인 모드 MVP의 첫 App Client는 브라우저 기반 UI Client다.
+
+## UI Client
+
+사용자의 작업 노트북, 태블릿 또는 다른 개인 장치에서 브라우저로 접속하는 UI 실행 환경.
+
+UI Client는 Owner와 대화하고, 작업 진행을 확인하고, Diff와 테스트 결과를 검토하고, 승인과 설정을 수행한다. UI Client는 프로젝트 코드, Owner Runtime 또는 주 SQLite DB의 필수 저장 위치가 아니다.
 
 ## Local Control Plane
 
@@ -29,6 +38,100 @@
 팀 모드의 Personal Node는 중앙 Authority와 연결되지만 중앙 DB의 복제본이나 동등한 Writer가 아니다.
 
 `Node`는 내부 시스템 용어다. 사용자 화면에서는 가능한 한 `개인 서버`, `실행 서버`, `연결된 장치`, `이 컴퓨터` 같은 표현을 사용한다.
+
+## Primary Personal Server
+
+개인 모드 MVP에서 Local Control Plane, Owner Supervisor, Worker Supervisor, SQLite, Local Git Workspace, 웹 UI/API를 실행하는 사용자별 주 실행 환경.
+
+Primary Personal Server Runtime은 Windows와 Linux 지원을 목표로 설계한다. Ubuntu Linux는 초기 구현과 검증을 위한 Ubuntu reference environment다.
+
+## Runtime Platform Adapter
+
+운영체제별 차이를 Runtime 핵심 로직에서 분리하는 Adapter.
+
+- 경로 Resolver
+- 명령 실행
+- 실행 파일 확장자와 검색 경로 처리
+- 서비스 설치와 백그라운드 실행
+- 파일 잠금, 심볼릭 링크, 경로 길이, 줄바꿈, 실행 권한 차이 처리
+
+## User
+
+시스템을 사용하는 인간 계정.
+
+개인 모드 MVP에서는 사용자 가입을 구현하지 않고 첫 설치 시 로컬 사용자 한 명을 자동 생성한다. 그래도 향후 사용자 가입과 다중 사용자 기능을 위해 user 엔티티, user_id 참조, 장치와 사용자 관계, 프로젝트 소유권, 세션과 권한 구조를 유지한다.
+
+사용자 정보를 전역 상수나 하드코딩된 단일 ID로 처리하지 않는다.
+
+## Reference Environment
+
+초기 개발, 통합 테스트와 실제 운영 기준으로 사용하는 환경. 개인 모드 MVP의 Reference Environment는 Ubuntu Linux다.
+
+Reference Environment는 유일한 지원 운영체제를 의미하지 않는다.
+
+## Supported Operating System
+
+제품 지원 목표에 포함되는 운영체제. 개인 모드 MVP의 Primary Personal Server Runtime은 Windows와 Linux 지원을 목표로 한다.
+
+macOS는 첫 MVP의 공식 지원 범위에 포함하지 않는다.
+
+## Connected Device
+
+Primary Personal Server에 연결된 UI Client 장치 또는 브라우저 실행 환경. Tailscale에 연결되어 있더라도 자동으로 앱에 로그인되지 않으며, 최초 연결에는 일회용 연결 코드가 필요하다.
+
+## Device Session
+
+승인된 Connected Device 또는 브라우저 세션에 발급된 세션. 설정 화면에서 확인하고 폐기할 수 있어야 한다.
+
+## Project Import
+
+Primary Personal Server에 프로젝트를 추가하는 절차.
+
+구현 순서:
+
+1. 이미 존재하는 Git 저장소 가져오기
+2. Git URL로 Clone
+3. 빈 프로젝트 생성
+
+## Allowed Project Root
+
+프로젝트 가져오기를 기본 허용하는 상위 경로. 설정된 Allowed Project Root 밖의 임의 경로는 기본적으로 가져오지 않는다.
+
+Project Import는 경로 정규화, Path traversal 검사, symlink 또는 junction 검사, 저장소 유효성 검사, dirty 상태 확인, Canonical Path 비교를 수행한다.
+
+## Platform Path Resolver
+
+운영체제별 기본 데이터 경로와 프로젝트 경로를 결정하는 Adapter. `/home/...`, `/var/...`, `C:\Users\...`, `C:\ProgramData\...` 같은 경로를 핵심 코드에 고정하지 않는다.
+
+## Process Runner
+
+명령 실행 Adapter. Shell 문자열보다 executable, argument array, working directory, environment variables, timeout, cancellation token 구조를 사용한다.
+
+Windows와 Linux의 실행 파일 확장자, 검색 경로, 파일 권한, 경로 길이와 잠금 차이를 처리한다.
+
+## Service Adapter
+
+운영체제별 서비스 설치와 백그라운드 실행을 분리하는 Adapter. Linux systemd, Windows Service, Windows 사용자 세션 기반 백그라운드 실행, 시작 프로그램 등록은 후보이며 구체적인 선택은 후속 설계로 남긴다.
+
+## CLI Model Adapter
+
+CLI 방식 Model Provider Adapter. Codex CLI Adapter, Gemini CLI Adapter, Generic Command Adapter 같은 구현을 둘 수 있으며, 이후 API Adapter를 추가할 수 있어야 한다.
+
+CLI 계정 가입, 구독 상태 관리, 결제, OAuth 로그인, 사용량 구매는 MVP 내부 기능이 아니다.
+
+## Generic Development Worker
+
+첫 MVP에서 사용하는 단일 범용 개발 Worker. 프로젝트와 코드 읽기, 허용된 Worktree 안의 파일 수정, 안전한 명령 실행, 포맷터, 린터, 테스트, Git status와 diff 생성, 로컬 commit 후보 생성, 결과 요약, 실패 보고를 수행한다.
+
+전문 Worker 분리는 안정화 후로 미룬다.
+
+## Git Worktree
+
+Task 또는 Task Attempt별 격리 작업 공간. Worker는 사용자의 기본 작업 디렉터리를 직접 수정하지 않고 별도 Worktree와 작업 브랜치에서 작업한다.
+
+## Merge Approval
+
+Worker 결과를 기본 브랜치 또는 사용자의 실제 작업 브랜치에 반영하기 전 사용자가 수행하는 승인. UI는 Task 목표, Owner 결과 요약, 변경 파일, Git diff, 테스트와 린트 결과, 실행 명령, 위험 등급, 병합 대상 브랜치, 되돌리기 방법을 보여준다.
 
 ## Central Authority
 

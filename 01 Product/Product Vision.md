@@ -19,6 +19,7 @@ updated: 2026-06-21
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## 사용자 경험
 
@@ -33,6 +34,8 @@ updated: 2026-06-21
 - 사용자는 범위가 제한된 Owner 자율 권한을 선택할 수 있다.
 - 팀 정책과 다른 사용자의 권한은 개인 Grant로 우회할 수 없다.
 - 고위험 작업은 위험 기반 승인 UI에서 대상, 범위, 위험, 되돌리기 가능성을 확인한다.
+- 개인 모드 MVP의 Primary Personal Server Runtime은 Windows와 Linux 지원을 목표로 설계한다.
+- Ubuntu Linux는 초기 구현과 검증을 위한 Ubuntu reference environment다.
 
 ## 모드
 
@@ -48,10 +51,20 @@ updated: 2026-06-21
 - 공식 공유 상태는 중앙 Authority가 관리한다.
 - 개인 Node는 중앙 DB의 동등한 Writer가 아니다.
 
+## 구현 우선순위
+
+첫 구현 목표는 개인 모드 MVP다. 개인 모드 MVP는 Primary Personal Server 중심의 웹 UI, CLI-first Model Provider Adapter, Generic Development Worker, SQLite, Git Worktree 격리, 프로젝트별 자율성 설정을 구현한다.
+
+사용자 가입은 개인 모드 안정화 이후로 미룬다. 단, user 모델과 user_id 참조는 유지한다.
+
+개인 모드가 안정화된 뒤 팀 모드, 중앙 Authority, PostgreSQL, 전문 Worker를 추가한다.
+
 ## Non-goals
 
 - Discord 운영 UI
 - 초기 멀티 마스터 DB
 - 초기 중앙 의사결정 AI
+- 첫 MVP의 macOS 공식 지원
+- 개인 모드 MVP의 사용자 가입
 - 초기 Enterprise SSO와 다중 조직 SaaS
 - 초기 마이크로서비스 분리

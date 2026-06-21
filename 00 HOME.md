@@ -6,7 +6,10 @@
 
 ## 핵심 문서
 
+현재 최우선 설계는 개인 모드 MVP다.
+
 - [[01 Product/Product Vision]]
+- [[01 Product/Personal Mode MVP]]
 - [[02 Architecture/System Context]]
 - [[02 Architecture/Data Ownership]]
 - [[03 Domain Model/Domain Model]]
@@ -18,6 +21,8 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
+- [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[10 Open Questions/Open Questions]]

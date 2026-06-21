@@ -5,20 +5,28 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## 개인 모드
 
 SQLite를 사용한다.
 
-저장 데이터:
+저장 데이터 후보:
 
-- Owner 대화
-- 개인 메모리
+- local_users
+- connected_devices
+- device_sessions
+- projects
+- project_settings
 - owner_conversations
 - owner_messages
 - agent_runs
 - agent_run_steps
 - tool_calls
+- work_items
+- tasks
+- task_attempts
+- worker_runs
 - run_checkpoints
 - owner_memories
 - pending_approvals
@@ -31,17 +39,18 @@ SQLite를 사용한다.
 - security_audit_events
 - budget_usage
 - runtime_events
-- Work Item
-- Task
-- Task Attempt
-- Worker 실행
-- 승인
-- 로컬 Change Package
-- 설정
+- git_worktrees
+- artifact_refs
+- local_change_packages
+- app_settings
 
 개인 모드에서는 Local Control Plane이 한 사용자 중심의 로컬 데이터 저장소를 관리한다.
 
 개인 프로젝트의 Approval Request와 결과, 개인 Owner Grant, 개인 자율성 설정, 로컬 감사 기록은 SQLite가 공식 원본이다.
+
+개인 모드 MVP의 SQLite 데이터 경로는 운영체제별 기본 데이터 경로 Resolver와 설정으로 정한다. `/home/...`, `/var/...`, `C:\Users\...`, `C:\ProgramData\...` 같은 경로를 코드에 고정하지 않는다.
+
+구체적인 전체 스키마와 인덱스는 후속 데이터 모델 설계로 남긴다.
 
 ## 팀 Personal Node
 

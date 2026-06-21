@@ -5,6 +5,7 @@
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## 분리할 신원
 
@@ -13,6 +14,20 @@
 - Worker Identity: Node 내부 Worker 실행 신원
 
 토큰과 권한을 서로 공유하지 않는다.
+
+개인 모드 MVP에서는 사용자 가입을 구현하지 않지만 Human Identity를 전역 상수나 하드코딩된 단일 ID로 대체하지 않는다. 첫 설치 시 자동 생성되는 로컬 사용자도 user 엔티티, user_id, 세션과 권한 구조를 가진다.
+
+Primary Personal Server는 Windows와 Linux에서 같은 권한 모델을 제공해야 한다. 운영체제별 서비스 계정, 사용자 세션, 파일 권한 차이는 Runtime Platform Adapter와 설치 설계에서 분리해 다룬다.
+
+개인 모드 MVP의 기본 접근은 localhost 또는 Tailscale이다. 인터넷에 직접 공개하거나 공개 IP와 포트포워딩을 기본으로 사용하지 않는다. Tailscale은 네트워크 접근 전제일 뿐 앱 내부 권한 모델을 대체하지 않는다.
+
+최초 UI Client 연결에는 짧은 유효시간의 일회용 연결 코드를 사용한다. 코드는 한 번 사용하면 폐기하고, 로그에 원문을 장기 저장하지 않으며, 승인된 장치 토큰과 분리한다. 장치 토큰과 세션은 설정 화면에서 폐기할 수 있어야 한다.
+
+프로젝트 가져오기는 허용 프로젝트 루트 안에서만 기본 허용한다. 경로 정규화, Path traversal 검사, symlink와 junction 검사, Canonical Path 비교, 저장소 유효성 검사와 dirty 상태 확인을 수행한다.
+
+CLI 실행은 executable, argument array, working directory, environment variables, timeout, cancellation token 구조를 사용한다. 사용자 입력을 하나의 Shell 문자열로 조합하지 않는다.
+
+비밀정보는 로그와 모델 Context에 직접 노출하지 않는다. Worktree 격리로 Worker가 사용자의 기본 작업 디렉터리를 직접 수정하지 않게 한다.
 
 ## Tool 실행 경계
 

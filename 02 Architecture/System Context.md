@@ -4,24 +4,37 @@
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## 개인 모드
 
 ```mermaid
 flowchart LR
-    User[User] --> UI[App UI]
-    UI --> LCP[Local Control Plane]
+    User[User] --> Browser["UI Client Browser"]
+    Browser --> Tail["Tailscale or localhost"]
+    Tail --> PPS["Windows or Linux Primary Personal Server"]
+    PPS --> Web["Web UI and API"]
+    Web --> LCP[Local Control Plane]
     LCP --> OwnerSupervisor[Owner Supervisor]
     OwnerSupervisor --> ConversationStore[Conversation Store]
     OwnerSupervisor --> RunEngine[Agent Run Engine]
+    RunEngine --> CLI["CLI Model Adapter"]
     RunEngine --> Supervisor[Worker Supervisor]
+    Supervisor --> Worker["Generic Development Worker"]
     LCP --> LocalSQLite[(SQLite)]
     ConversationStore --> LocalSQLite
     RunEngine --> LocalSQLite
-    Supervisor --> Workspace[Local Git Workspace]
+    Worker --> Workspace["Git Repository and Worktree"]
+    PPS --> Logs["Logs and Artifacts"]
 ```
 
 개인 모드에서는 Local Control Plane이 개인 프로젝트 상태, Work Item, Task, Task Attempt, 로컬 승인, 로컬 병합, 실행 로그와 실패 복구를 관리한다. 별도의 중앙 Authority 서버는 필요하지 않다.
+
+Primary Personal Server Runtime은 Windows와 Linux 지원을 목표로 설계한다. 첫 개발, 통합 테스트와 실제 운영 기준 환경은 Ubuntu reference environment다.
+
+Runtime 핵심 로직은 운영체제에 종속되지 않는다. 운영체제별 경로 해석, 명령 실행, 서비스 설치와 백그라운드 실행은 Adapter로 분리한다.
+
+UI Client 브라우저와 연결된 장치 세션은 프로젝트 상태의 원본이 아니다. 개인 모드 MVP의 공식 실행 상태 원본은 Primary Personal Server의 SQLite다.
 
 ## 팀 모드
 

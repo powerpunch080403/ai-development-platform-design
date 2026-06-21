@@ -5,6 +5,7 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
+- [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 
 ## Phase 0: 설계 저장소
 
@@ -19,6 +20,10 @@
 - 개인 모드 프로젝트 흐름
 - 개인 Owner 대화
 - Task / Attempt
+- Primary Personal Server Runtime의 Windows/Linux 지원 목표 반영
+- Ubuntu reference environment에서 초기 검증
+- 개인 모드 MVP를 팀 모드보다 먼저 구현
+- 세부 구현 순서는 [[09 Roadmap/Personal Mode MVP Roadmap]]를 따른다.
 
 ## Phase 2: Local Control Plane
 
@@ -80,6 +85,8 @@
 - Change Package와 Merge Queue
 - Approval Policy
 - Audit Event
+
+이 단계는 개인 모드 MVP 안정화 이후 진행한다.
 
 ## Phase 7: Personal Node 연결
 

@@ -14,7 +14,7 @@ scope:
 
 ## 배경
 
-[[07 ADR/ADR-0004 Governance and Approval Policy]]는 프로젝트 운영 권한과 기술 승인 권한을 분리했다. [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]는 Owner가 등록된 Tool Call을 통해 외부 부작용을 실행하고, 필요한 경우 Agent Run을 승인 대기 상태로 중단한다고 결정했다.
+[[07 ADR/ADR-0004 Governance and Approval Policy]]는 프로젝트 운영 권한과 기술 승인 권한을 분리했다. [[07 ADR/ADR-0006 Owner Runtime and Agent Runs]]는 Owner가 등록된 Tool Call을 통해 외부 부작용을 실행하고, 필요한 경우 Agent Run을 승인 대기 상태로 중단한다고 결정했다. 개인 모드 MVP의 기본 프로필과 승인 화면 범위는 [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]에서 구체화한다.
 
 이제 Owner에게 어느 정도 자율성을 줄 수 있는지, 어떤 행동이 승인을 요구하는지, 개인 모드와 팀 모드에서 승인 원본을 누가 소유하는지 결정해야 한다.
 
