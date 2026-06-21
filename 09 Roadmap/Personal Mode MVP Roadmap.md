@@ -5,12 +5,15 @@
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
+- [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 
 ## Phase 0 - Repository and Skeleton
 
 - 새 v2 저장소 결정
 - Python/FastAPI 기본 구조
 - React/TypeScript/Vite 기본 구조
+- Desktop App Shell 재사용을 고려한 Desktop-ready Web UI 구조
+- localhost HTTP API와 Internal Tool Contract 경계
 - Windows와 Linux를 고려한 설정 시스템
 - 운영체제 Path Resolver
 - Process Runner 추상화
@@ -100,6 +103,7 @@
 - Allow Local Work
 - Approval UI
 - Owner Grant
+- Owner Grant와 Autonomy Profile 기반 merge 승인 평가
 - Owner 검토와 squash merge
 - stale 승인
 
@@ -115,6 +119,8 @@
 
 ## Phase 5 - Web Experience
 
+- browser-accessible Web UI 우선 구현
+- Desktop App Shell에서 재사용 가능한 UI 구성
 - 프로젝트 화면
 - Owner 채팅
 - Task 진행
@@ -166,5 +172,7 @@
 - 여러 Worker Host
 - 전문 Worker 분리
 - 데스크톱 패키징
+- local IPC
+- OS keychain 연동
 - 자동 업데이트
 - macOS 공식 지원

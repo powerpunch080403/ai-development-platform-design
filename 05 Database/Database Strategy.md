@@ -7,6 +7,7 @@
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
+- [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 
 ## 개인 모드
 
@@ -24,14 +25,18 @@ SQLite를 사용한다.
 - messages
 - agent_runs
 - agent_run_steps
+- tool_definitions
 - tool_calls
 - work_items
 - tasks
 - task_attempts
 - worker_runs
+- worker_claims
+- worker_leases
 - run_checkpoints
 - owner_memories
 - pending_approvals
+- approval_interruptions
 - autonomy_profiles
 - owner_grants
 - approval_requests
@@ -57,6 +62,10 @@ SQLite를 사용한다.
 개인 모드 MVP의 SQLite 데이터 경로는 운영체제별 기본 데이터 경로 Resolver와 설정으로 정한다. `/home/...`, `/var/...`, `C:\Users\...`, `C:\ProgramData\...` 같은 경로를 코드에 고정하지 않는다.
 
 ProjectRepository, Work Item, Task, Task Attempt, Conversation, Agent Run과 Git 메타데이터의 관계, 상태 전이와 무결성 규칙은 [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]을 따른다. 구체적인 전체 스키마, 타입, 인덱스와 DDL은 후속 데이터 모델 설계로 남긴다.
+
+`tool_calls`는 [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]의 공통 Envelope에 따라 Tool 이름과 버전, caller, 관련 도메인 ID, risk level, idempotency key, correlation ID, arguments, 상태, 결과·오류 참조와 시간을 추적한다. Approval Interruption은 Approval Request와 Agent Run의 대기 상태를 연결한다. 큰 Tool 결과와 실행 증거는 `artifact_refs`로 Artifact Store를 참조한다.
+
+상태 전이와 외부 부작용은 `runtime_events`와 `audit_events`에 기록한다. Tool Registry의 정확한 저장 방식, 전체 schema, index, lease timeout과 artifact 보존 정책은 후속 설계로 남긴다.
 
 ## 팀 Personal Node
 

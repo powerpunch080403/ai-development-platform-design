@@ -23,6 +23,7 @@
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
+- [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]

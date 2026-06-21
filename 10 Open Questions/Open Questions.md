@@ -39,13 +39,13 @@
 - user 엔티티, user_id 참조, 장치와 사용자 관계, 프로젝트 소유권, 세션과 권한 구조는 유지한다.
 - 첫 구현 목표는 팀 모드가 아니라 개인 모드 MVP다.
 - 개인 모드 MVP는 Primary Personal Server 중심으로 배치한다.
-- 첫 UI는 설치형 데스크톱 앱이 아니라 브라우저 웹 UI다.
+- 제품의 공식 장기 UI 목표는 Desktop App이며, 초기 MVP는 Desktop App Shell에 재사용 가능한 browser-accessible Web UI로 시작한다.
 - 개인 모드 MVP의 원격 접속은 Tailscale을 기본 전제로 한다.
 - 기존 서버 Git 저장소 가져오기부터 구현한다.
 - Model Provider Adapter는 API와 CLI를 지원할 수 있게 설계하고 MVP는 CLI 우선이다.
 - 첫 Worker는 Generic Development Worker 하나다.
 - Worker는 격리된 Git Worktree 안에서 기본 자동 작업할 수 있다.
-- 기본 브랜치 병합 전에는 사용자 승인이 필요하다.
+- 기본 `Allow Local Work`에서는 기본 브랜치 병합 전에 사용자 승인이 필요하다.
 - 프로젝트별 자율성 설정이 가능하다.
 - Project는 하나 이상의 ProjectRepository를 가지며 여러 Git Repository를 포함할 수 있다.
 - Personal Mode MVP의 첫 작업 실행은 primary repository 중심으로 시작한다.
@@ -58,6 +58,17 @@
 - dirty repository에서는 등록과 읽기·분석은 허용하지만 해당 repository의 Worker 작업 시작은 차단한다.
 - Worker는 Owner 검토와 승인 절차 없이 기본 브랜치에 병합할 수 없다.
 - 하나의 Task에는 여러 Task Attempt가 있을 수 있고 재시도는 기존 Attempt를 덮어쓰지 않는다.
+- HTTP API는 브라우저 전용이 아니라 UI Shell을 서버 기능에 연결하는 첫 local transport다.
+- Internal Tool Contract를 먼저 정의하고 HTTP API는 동일 application service를 호출하는 transport로 둔다.
+- Tool은 일반 AI 능력 확장이 아니라 플랫폼이 소유한 서버 상태와 부작용을 통제하는 기능이다.
+- 최종 Tool 목록은 고정하지 않고 Tool Registry에서 버전, schema와 정책 메타데이터를 관리한다.
+- 모든 Tool Call은 공통 Envelope를 가지며 부작용 Tool에는 idempotency key가 필요하다.
+- Tool Boundary와 Policy Engine은 각각 정상 실행 틀과 호출 권한·승인 여부를 판단한다.
+- Personal Mode는 Primary Personal Server 내부의 Local Policy Engine을 사용한다.
+- 승인 필요 시 Approval Interruption을 만들고 Agent Run을 `waiting_for_approval`로 전환한다.
+- Worker lease/claim과 `artifact_refs`는 Personal Mode MVP에 포함한다.
+- Command Policy는 사용자나 조직이 실행 환경 경계를 표현하는 설정이다.
+- Personal Mode의 squash merge 승인은 Owner Grant와 Autonomy Profile로 평가하며 기본 `Allow Local Work`에서는 사용자 승인이 필요하다.
 
 관련 문서:
 
@@ -67,6 +78,7 @@
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
+- [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 
 ## 우선 답할 질문
 
@@ -97,7 +109,7 @@
 25. artifact 보존 기간과 용량 정책은 무엇인가?
 26. 추가 Worker Host를 도입할 시점은 언제인가?
 27. 자동 업데이트 방식은 무엇인가?
-28. 데스크톱 앱 포장 방식과 프론트엔드 세부 기술은 무엇인가?
+28. Desktop App Shell은 Tauri, Electron 또는 다른 기술 중 무엇을 사용하는가?
 29. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?
 30. multi-repository 작업의 원자적 병합 정책은 무엇인가?
 31. 한 repository의 dirty 상태가 다른 clean repository 작업을 차단해야 하는가?
@@ -106,3 +118,15 @@
 34. 정확한 SQLite 인덱스와 DDL은 무엇인가?
 35. cross-repository Change Package는 어떻게 설계하는가?
 36. 팀 모드 Approval Group과 Merge Coordinator의 세부 상태 머신은 무엇인가?
+37. local IPC를 사용할 것인가? 사용한다면 어떤 방식을 선택하는가?
+38. OS keychain은 어떤 방식으로 연동하는가?
+39. HTTP API 인증, 세션과 토큰 만료 정책은 무엇인가?
+40. 최종 Tool 목록과 각 Tool의 input/output schema는 무엇인가?
+41. Tool version 호환성과 migration은 어떻게 처리하는가?
+42. Worker lease timeout, heartbeat와 reclaim 규칙은 무엇인가?
+43. Worker package/report의 상세 형식은 무엇인가?
+44. artifact compression과 deletion 정책은 무엇인가?
+45. 팀 모드 Memory 구조는 무엇인가?
+46. Enterprise command policy의 상세 규칙은 무엇인가?
+47. Golden Path의 최종 end-to-end 테스트 시나리오는 무엇인가?
+48. Central Authority와 Personal Node 사이의 정책 캐시·위임 모델은 무엇인가?
