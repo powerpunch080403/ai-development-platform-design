@@ -30,9 +30,13 @@
 
 ## MVP 관련 문서
 
-- [[01 Product/Personal Mode MVP]]
+- [[01 Product/Personal Mode Complete Experience]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
+- [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 
 현재 단계는 Local Worker MVP baseline 상태이며, 외부 Worker 연동의 기본 파이프라인을 구축하는 중이다.
 Real AGY Worker Alpha has been verified in controlled opt-in paths, but general user-project automation remains gated by Owner-led policy and safe pilot validation.
+
+The design track now targets Personal Mode completion before additional implementation expansion.
+현재 설계 트랙은 추가 구현 확장보다 개인 모드 완성 정의와 설계 정렬을 우선한다.

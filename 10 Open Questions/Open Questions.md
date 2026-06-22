@@ -198,3 +198,18 @@
 79. OS별 app data directory 위치는 어디인가?
 80. Local Worker sandboxing은 어떻게 구현하는가?
 81. How to transition AGY from isolated worker to general assistant?
+
+## Personal Mode Completion Open Questions
+
+- What is the minimum UI needed for Owner-led planning?
+- How should Owner decompose broad user requests into Tasks?
+- How broad may Owner-assigned write_scope be without explicit approval?
+- What autonomy profiles should exist in Personal Mode?
+- Which file/path categories require approval by default?
+- How should failed worktrees be resumed?
+- Should a failed Attempt be continued or should a new Attempt always be created?
+- How should long-running Worker processes be cancelled?
+- How should artifacts be pruned without losing audit value?
+- What is the minimum Desktop Shell requirement?
+- What backup/export behavior is required for local SQLite/app data?
+- What is the first pilot repository and first real project scope?

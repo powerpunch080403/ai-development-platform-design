@@ -12,6 +12,7 @@
 
 - [[01 Product/Product Vision]]
 - [[01 Product/Personal Mode MVP]]
+- [[01 Product/Personal Mode Complete Experience]]
 - [[02 Architecture/System Context]]
 - [[02 Architecture/Data Ownership]]
 - [[03 Domain Model/Domain Model]]
@@ -29,9 +30,14 @@
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 - [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
+- [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
+- [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[10 Open Questions/Open Questions]]
 
 Real AGY Worker Alpha has been verified in controlled opt-in paths, but general user-project automation remains gated by Owner-led policy and safe pilot validation.
+
+The design track now targets Personal Mode completion before additional implementation expansion.
+현재 설계 트랙은 추가 구현 확장보다 개인 모드 완성 정의와 설계 정렬을 우선한다.
