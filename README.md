@@ -34,6 +34,7 @@
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
+- [[11 Reviews/Initial Personal Mode MVP Design Gap Audit]]
 
 현재 단계는 Local Worker MVP baseline 상태이며, 외부 Worker 연동의 기본 파이프라인을 구축하는 중이다.
 Real AGY Worker Alpha has been verified in controlled opt-in paths, but general user-project automation remains gated by Owner-led policy and safe pilot validation.

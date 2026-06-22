@@ -213,3 +213,4 @@
 - What is the minimum Desktop Shell requirement?
 - What backup/export behavior is required for local SQLite/app data?
 - What is the first pilot repository and first real project scope?
+- Does Tailscale serve as a hard requirement for all remote access, or strictly an optional capability?
