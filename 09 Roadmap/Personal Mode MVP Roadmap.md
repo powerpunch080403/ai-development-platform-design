@@ -1,5 +1,7 @@
 # Personal Mode MVP Roadmap
 
+**Status**: Implementation can resume after ADR-0017.
+
 관련 결정:
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]
