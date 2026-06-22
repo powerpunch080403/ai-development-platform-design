@@ -138,6 +138,7 @@
 - Antigravity CLI Worker Adapter
 - Adapter contract test
 - non-interactive 실행, auth와 prompt 실험
+- AGY Alpha Process stdin DEVNULL stabilization
 - stdout/stderr와 실패 정규화
 
 완료 조건:
@@ -200,6 +201,7 @@
 - 운영 테스트
 - Golden Path 1과 2 반복 검증
 - 작은 게임 제작 Golden Path 3 검증
+- Safe Pilot Policy validation for AGY Alpha
 
 완료 조건:
 

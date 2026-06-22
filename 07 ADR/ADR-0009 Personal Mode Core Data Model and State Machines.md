@@ -78,6 +78,12 @@ Task는 최소한 다음 성격의 필드를 가진다.
 - `read_scope`, `write_scope`, `forbidden_scope`, `required_capabilities`
 - `risk_level`, `status`, `created_at`, `updated_at`
 
+**write_scope 정책**:
+- `write_scope` is Owner-assigned per Task.
+- Worker cannot decide or expand `write_scope`.
+- `write_scope` enforcement happens before result commit.
+- Owner review still happens after result commit, providing a dual-layer safety net.
+
 Task Attempt는 최소한 다음 성격의 필드를 가진다.
 
 - `attempt_id`, `task_id`, `repository_id`, `worker_run_id`, `assigned_worker_id`
@@ -215,7 +221,11 @@ stateDiagram-v2
     cleanup_pending --> failed
 ```
 
-`planned`는 Attempt 생성, `creating`은 Worktree 생성 중, `ready`는 생성 완료, `in_use`는 Worker 실행 중이다. 변경이 생겼으나 commit 전이면 `dirty_result`, 작업 브랜치 commit 후에는 `committed`, Owner 검토 중에는 `reviewing`, 승인 요청 또는 병합 준비가 끝나면 `merge_ready`가 된다. Squash merge 후 `merged`, 실패하거나 사용자가 폐기하면 `abandoned`, 정리 예약과 삭제 완료는 각각 `cleanup_pending`, `cleaned`다. 생성·실행·정리 자체의 오류는 `failed`로 기록한다.
+`planned`는 Attempt 생성, `creating`은 Worktree 생성 중, `ready`는 생성 완료, `in_use`는 Worker 실행 중이다. 변경이 생겼으나 commit 전이면 `dirty_result`, 작업 브랜치 commit 후에는 `committed`, Owner 검토 중에는 `reviewing`, 승인 요청 또는 병합 준비가 끝나면 `merge_ready`가 된다. Squash merge 후 `merged`, 사용자가 명시적으로 폐기하면 `abandoned`, 정리 예약과 삭제 완료는 각각 `cleanup_pending`, `cleaned`다. 생성·실행·정리 자체의 오류는 `failed`로 기록한다.
+
+**실패한 Worktree 보존 정책**:
+- Failed, timed out, interrupted, or scope-violating worktrees are preserved by default. 오류 원인 분석이나 이어서 작업을 위해 자동 삭제하지 않는다.
+- `cleanup_pending` is mainly for successful merge or explicit abandon/cleanup flows. 실패 후 자동 cleanup을 기본 동작으로 삼지 않는다.
 
 ### Task
 

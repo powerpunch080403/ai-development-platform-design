@@ -33,3 +33,5 @@
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[10 Open Questions/Open Questions]]
+
+Real AGY Worker Alpha has been verified in controlled opt-in paths, but general user-project automation remains gated by Owner-led policy and safe pilot validation.

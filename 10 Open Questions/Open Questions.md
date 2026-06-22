@@ -197,3 +197,4 @@
 78. OS Path Resolver의 상세 contract는 무엇인가?
 79. OS별 app data directory 위치는 어디인가?
 80. Local Worker sandboxing은 어떻게 구현하는가?
+81. How to transition AGY from isolated worker to general assistant?
