@@ -199,3 +199,5 @@ Personal Mode is complete when a single local user can safely use the platform a
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
+- [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
+- [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]

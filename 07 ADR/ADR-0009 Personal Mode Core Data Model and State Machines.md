@@ -442,3 +442,4 @@ User = Personal Mode MVP 기본 브랜치 반영 최종 승인자
 - [[05 Database/Database Strategy]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[10 Open Questions/Open Questions]]
+- [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]

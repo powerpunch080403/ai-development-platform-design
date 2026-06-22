@@ -1,5 +1,10 @@
 # Personal Mode Complete Experience
 
+관련 결정:
+- [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
+- [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
+- [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
+
 ## Goal
 사용자가 로컬 환경에서 실제 프로젝트를 등록하고, Owner와 대화하여 Task를 만들며, Worker가 격리된 worktree에서 안전하게 작업을 수행하고 검토/병합/복구까지 이어지는 완결된 AI 개발 워크스페이스를 제공한다.
 개인 모드는 팀 협업이나 중앙 서버 없이 단일 로컬 사용자 한 명을 위해 작동하는 완성된 개발 작업공간이다.

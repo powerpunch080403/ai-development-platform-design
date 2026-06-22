@@ -3,7 +3,7 @@
 ## Purpose
 ADR-0014에서 확정된 Owner-led Worker 구조와 엄격한 통제 정책(write_scope 강제, 사용자-Worker 직접 대화 금지, 실패 Worktree 보존 등)을 기준으로, 기존 설계 문서들의 빈틈이나 충돌을 파악한다. 이 문서는 초기 MVP 구현을 시작하기 전에 어떤 설계 항목이 확정되었고, 어떤 부분이 아직 모호한지 분류하여 ADR-0016 및 후속 설계에서 채워야 할 범위를 정의한다.
 
-> **Update**: 2026-06-23에 작성된 [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]가 이 감사에서 발견된 Owner planning, write_scope, preflight, MVP UI minimums 블로커를 닫았고 Tailscale 충돌을 해결했습니다. 실패 worktree resume 의미론은 향후 ADR-0017에서 다룹니다.
+> **Update**: 2026-06-23에 작성된 [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]가 이 감사에서 발견된 Owner planning, write_scope, preflight, MVP UI minimums 블로커를 닫았고 Tailscale 충돌을 해결했습니다. 실패 worktree resume 의미론과 복구 정책은 [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]에서 확정되었습니다.
 
 ## Reviewed Documents
 - `README.md`

@@ -59,3 +59,4 @@ Accepted
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 - [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
+- [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]

@@ -12,6 +12,7 @@
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
 - [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
+- [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
 
 ## Phase A: Local Runtime and Identity Complete
 (Already validated / Implementation baseline)
@@ -83,13 +84,13 @@
 ## Phase G: Failure Recovery and Resume Complete
 (Next up)
 
-- failed worktree preservation by default
-- timeout/failure/scope violation worktree remains inspectable
-- manual continuation
-- retry attempt
-- abandon
-- cleanup only after explicit request or successful merge cleanup_pending
-- Codex-like "partial work remains" behavior
+- failed worktree preservation by default (Closed by ADR-0017)
+- timeout/failure/scope violation worktree remains inspectable (Closed by ADR-0017)
+- manual continuation (Closed by ADR-0017)
+- retry attempt (Closed by ADR-0017)
+- abandon (Closed by ADR-0017)
+- cleanup only after explicit request or successful merge cleanup_pending (Closed by ADR-0017)
+- Codex-like "partial work remains" behavior (Closed by ADR-0017)
 
 ## Phase H: Artifact/Audit/Observability Complete
 (Next up)

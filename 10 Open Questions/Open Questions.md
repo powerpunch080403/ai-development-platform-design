@@ -108,6 +108,11 @@
 - How broad may Owner-assigned write_scope be without explicit approval?
 - Which file/path categories require approval by default?
 
+### Resolved by ADR-0017
+- Should a failed Attempt be continued or should a new Attempt always be created?
+- How should Owner resume failed or interrupted AGY worktrees?
+- When should cleanup be automatic versus Owner/user initiated?
+
 관련 문서:
 
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
@@ -208,8 +213,6 @@
 ## Personal Mode Completion Open Questions
 
 - What autonomy profiles should exist in Personal Mode?
-- How should failed worktrees be resumed?
-- Should a failed Attempt be continued or should a new Attempt always be created?
 - How should long-running Worker processes be cancelled?
 - How should artifacts be pruned without losing audit value?
 - What is the minimum Desktop Shell requirement?

@@ -203,3 +203,4 @@ Initial MVP should expose at least:
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
+- [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
