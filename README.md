@@ -33,6 +33,7 @@
 - [[01 Product/Personal Mode Complete Experience]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
+- [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[11 Reviews/Initial Personal Mode MVP Design Gap Audit]]
 

@@ -11,6 +11,7 @@
 - [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
+- [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 
 ## Phase A: Local Runtime and Identity Complete
 (Already validated / Implementation baseline)
@@ -49,9 +50,10 @@
 - Work Item hierarchy 설계
 - Task as Worker assignment unit
 - Task Attempt as one execution record
-- Task instruction, read_scope, write_scope, forbidden_scope
+- Task instruction, read_scope, write_scope, forbidden_scope (Closed by ADR-0016 Initial MVP Execution Policy)
 - risk/capability metadata 연결
 - retry without overwriting history
+- Owner planning and Task decomposition (Closed by ADR-0016)
 
 ## Phase E: Worker/Adapter Complete
 (Implementation in progress)
@@ -63,6 +65,7 @@
 - AGY Worker Alpha Integration (Opt-in, controlled)
 - AGY Alpha Process stdin DEVNULL stabilization
 - active WorkerRun guard
+- Owner preflight policy (Closed by ADR-0016)
 
 ## Phase F: Git Worktree/Review/Merge Complete
 (Implementation in progress)
@@ -107,7 +110,8 @@
 - danger flag local config only
 - cleanup preferences
 - adapter enable/disable
-- default write_scope policy
+- default write_scope policy (Closed by ADR-0016)
+- Initial MVP UI minimums (Closed by ADR-0016)
 
 ## Phase J: Desktop Shell and Packaging Complete
 (Next up)

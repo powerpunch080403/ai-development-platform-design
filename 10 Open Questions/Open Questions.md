@@ -102,6 +102,12 @@
 - 작은 게임 제작은 Golden Path 1·2 뒤 Personal Alpha에서 수행한다.
 - v1 코드를 복사하거나 fork하지 않고 아이디어만 후보로 참고한다.
 
+### Resolved by ADR-0016
+- What is the minimum UI needed for Owner-led planning?
+- How should Owner decompose broad user requests into Tasks?
+- How broad may Owner-assigned write_scope be without explicit approval?
+- Which file/path categories require approval by default?
+
 관련 문서:
 
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
@@ -201,11 +207,7 @@
 
 ## Personal Mode Completion Open Questions
 
-- What is the minimum UI needed for Owner-led planning?
-- How should Owner decompose broad user requests into Tasks?
-- How broad may Owner-assigned write_scope be without explicit approval?
 - What autonomy profiles should exist in Personal Mode?
-- Which file/path categories require approval by default?
 - How should failed worktrees be resumed?
 - Should a failed Attempt be continued or should a new Attempt always be created?
 - How should long-running Worker processes be cancelled?

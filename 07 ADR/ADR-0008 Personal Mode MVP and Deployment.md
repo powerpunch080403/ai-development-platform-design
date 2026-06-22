@@ -179,21 +179,20 @@ Windows와 Linux의 Primary Personal Server는 동일한 웹 UI와 API를 제공
 
 사용자를 전역 상수, 하드코딩된 ID 또는 사용자 개념이 없는 구조로 구현하지 않는다.
 
-## Tailscale 전제
+## Tailscale과 원격 접속
 
-개인 모드 MVP의 원격 접속은 Tailscale 네트워크를 기본 전제로 한다.
+Personal Mode의 기본 앱 접속은 로컬 브라우저 기반 Web UI 또는 localhost를 통한다.
+Tailscale은 기본 앱 접속의 필수 전제가 아니며, 원격 Worker/Test Runner 네트워크 구성이나 외부 장치에서 접근할 때 사용할 수 있는 선택적 사설 네트워크 후보다.
 
 기본 원칙:
 
 - 인터넷에 직접 공개하지 않음
 - 공개 IP와 포트포워딩을 기본 사용하지 않음
-- 기본적으로 localhost 또는 Tailscale 인터페이스에서만 접근 허용
-- Tailscale 자체가 앱 내부 권한 모델을 완전히 대체하지는 않음
+- 기본적으로 localhost 접근만 허용
+- Tailscale 등 사설망은 옵션으로 구성 가능
 - 연결된 장치와 브라우저 세션을 구분함
 
-Tailscale이 설치되지 않았거나 연결되지 않은 경우에는 같은 Primary Personal Server의 localhost 접근만 허용할 수 있다.
-
-Tailscale 설치, 계정 가입과 로그인 자동화는 첫 MVP의 필수 범위가 아니다. 사용자가 Tailscale을 미리 설치하고 구성했다고 가정한다.
+원격 접속과 Remote Test Runner의 네트워크 세부 사항은 ADR-0012와 후속 설계에서 관리한다.
 
 ## 최초 장치 연결
 

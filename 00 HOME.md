@@ -32,6 +32,7 @@
 - [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
+- [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]

@@ -17,6 +17,7 @@ updated: 2026-06-22
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
 - [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
+- [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 
 ## 대상 사용자
 
