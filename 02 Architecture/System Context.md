@@ -9,8 +9,23 @@
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
+- [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 
 ## 개인 모드
+
+v2 구현은 별도 Public Monorepo `ai-development-platform`에서 시작한다.
+
+```text
+apps/server          = App-managed Local Runtime와 FastAPI
+apps/web             = Desktop-ready Web UI
+apps/runner-agent    = 후반 Slice의 Remote Test Runner Agent
+packages/shared-contracts = API/Tool schema와 shared types
+packages/cli-adapters     = 외부 Agent Process Adapter contracts
+```
+
+Owner와 Worker는 도메인 역할이고 Codex CLI와 Antigravity CLI는 초기 외부 Agent Process Adapter다. 플랫폼은 외부 CLI의 내부 상태를 소유하지 않으며 process input, working directory, environment, stdout/stderr, exit status, artifact와 Git 결과를 실행·관찰·기록한다.
+
+Ubuntu Desktop을 primary runtime target으로, Windows를 development/compatibility target으로 둔다. Windows 지원을 제거하지 않으며 OS Path Resolver와 Process Runner가 native OS 차이를 격리한다.
 
 개인 모드의 UI와 서버 경계는 다음과 같다.
 

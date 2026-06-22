@@ -3,6 +3,8 @@
 | 데이터 | 권위 있는 소유자 |
 |---|---|
 | 개인 프로젝트 상태 | Local Control Plane |
+| v2 source code와 repository history | Public `ai-development-platform` Git repository |
+| Local Runtime DB, logs, artifacts와 worktrees | App data directory와 각 전용 저장소 |
 | 개인 모드 MVP 실행 상태 | Primary Personal Server SQLite |
 | ProjectRepository 메타데이터 | Primary Personal Server SQLite |
 | Task와 Task Attempt 메타데이터 | Primary Personal Server SQLite |
@@ -52,10 +54,13 @@
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
+- [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 
 ## 원칙
 
 - 개인 프로젝트 상태는 Local Control Plane이 소유한다.
+- Public 구현 repository는 source code와 개발 문서만 소유한다. Runtime DB, artifact, worktree, log, 사용자 Project와 credential의 원본이 아니다.
+- App-managed Local Runtime의 app data directory와 Git/Artifact Store가 runtime state를 소유한다.
 - 개인 모드 MVP의 공식 실행 상태, 사용자와 장치 연결 정보, ProjectRepository, Task Attempt, Worktree, Commit 참조, Merge Record, Artifact 참조와 Audit Event 메타데이터는 Primary Personal Server의 SQLite가 원본이다.
 - Local Runtime SQLite는 local user, Device, Session, pairing code hash, Session token hash와 nullable 중앙 `account_id` 연결 정보를 소유한다.
 - 대형 로그, 바이너리 아티팩트와 테스트 출력은 파일 저장소가 원본일 수 있으며 SQLite에는 참조를 저장할 수 있다.
@@ -83,3 +88,4 @@
 - 개인 Node DB와 중앙 DB의 양방향 테이블 복제
 - 여러 개인 Node가 같은 공유 상태의 동등한 Writer가 되는 구조
 - Timestamp만으로 충돌을 덮어쓰는 Last Write Wins
+- Public source repository에 local SQLite DB, artifact, worktree, runtime log, 사용자 Project 내용, secret 또는 credential commit

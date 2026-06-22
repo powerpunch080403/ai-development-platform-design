@@ -87,6 +87,20 @@
 - Worker는 artifact를 분석해 Worker Report를 작성한다.
 - Owner와 UI는 `artifact_ref`를 통해 필요 시 원본 artifact를 열람할 수 있다.
 - Tailscale은 앱 접속 수단이 아니라 Remote Test Runner 연결을 위한 선택적 사설 네트워크 후보다.
+- v2는 새 Public 구현 저장소 `ai-development-platform`에서 만들고 v1 저장소는 참고 구현으로만 사용한다.
+- v2 구현 저장소는 apps/packages 경계가 있는 Monorepo로 시작한다.
+- Backend는 Python + FastAPI, Frontend는 React + TypeScript + Vite를 사용한다.
+- Python tooling은 uv, Frontend tooling은 pnpm을 사용한다.
+- SQLite + SQLAlchemy 2 + Alembic을 사용한다.
+- API는 REST JSON을 우선하고 SSE는 상태·로그 streaming 후보, WebSocket은 후순위다.
+- Ubuntu Desktop을 primary runtime target, Windows를 development/compatibility target으로 둔다.
+- 목표 Adapter는 Codex CLI Owner와 Antigravity CLI Worker다.
+- Mock Adapter와 Manual Adapter는 개발·pipeline 검증·복구용 fallback이다.
+- 첫 구현은 Local Worker Golden Path를 먼저 완성한다.
+- Remote Test Runner는 MVP에 포함하지만 Local Worker와 목표 CLI Adapter integration 뒤에 구현한다.
+- Desktop App Shell은 초기 Desktop-ready Web UI 뒤의 후속 단계다.
+- 작은 게임 제작은 Golden Path 1·2 뒤 Personal Alpha에서 수행한다.
+- v1 코드를 복사하거나 fork하지 않고 아이디어만 후보로 참고한다.
 
 관련 문서:
 
@@ -99,6 +113,7 @@
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
+- [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 
 ## 우선 답할 질문
 
@@ -120,7 +135,7 @@
 16. Windows Service와 사용자 세션 기반 백그라운드 실행 중 무엇을 우선할 것인가?
 17. 운영체제별 기본 데이터 경로 Resolver는 어떻게 정의할 것인가?
 18. macOS 공식 지원 시점은 언제인가?
-19. 첫 번째 실제 CLI Adapter 종류는 무엇인가?
+19. Agent Process Adapter의 공통 contract와 versioning은 어떻게 정의하는가?
 20. CLI별 구조화된 출력 방식은 무엇인가?
 21. Session token refresh 정책과 권장 만료 기간의 최종 조정값은 무엇인가?
 22. 허용 프로젝트 루트의 운영체제별 기본 경로는 무엇인가?
@@ -130,7 +145,7 @@
 26. 추가 Worker Host를 도입할 시점은 언제인가?
 27. 자동 업데이트 방식은 무엇인가?
 28. Desktop App Shell은 Tauri, Electron 또는 다른 기술 중 무엇을 사용하는가?
-29. 새 v2 저장소의 실제 생성 및 마이그레이션 방식은 무엇인가?
+29. 실제 `ai-development-platform` Public repository는 언제 생성하는가?
 30. multi-repository 작업의 원자적 병합 정책은 무엇인가?
 31. 한 repository의 dirty 상태가 다른 clean repository 작업을 차단해야 하는가?
 32. 자동 commit 비활성화 옵션의 UX는 무엇인가?
@@ -148,7 +163,7 @@
 44. artifact compression과 deletion 정책은 무엇인가?
 45. 팀 모드 Memory 구조는 무엇인가?
 46. Enterprise command policy의 상세 규칙은 무엇인가?
-47. Golden Path의 최종 end-to-end 테스트 시나리오는 무엇인가?
+47. 새 구현 repository skeleton을 생성할 정확한 prompt는 무엇인가?
 48. Central Authority와 Personal Node 사이의 정책 캐시·위임 모델은 무엇인가?
 49. 중앙 account 로그인 방식은 무엇인가?
 50. 회원가입, password와 OAuth 정책은 무엇인가?
@@ -171,3 +186,14 @@
 67. Remote AI Worker Node를 지원할 것인가?
 68. 팀 공유 Test Runner Pool은 어떻게 설계하는가?
 69. Enterprise runner isolation 정책은 무엇인가?
+70. 첫 Alembic migration의 정확한 DDL은 무엇인가?
+71. 첫 Tool subset과 각 input/output schema는 무엇인가?
+72. Codex CLI non-interactive 실행 방식은 무엇인가?
+73. Antigravity CLI non-interactive 실행 방식은 무엇인가?
+74. 외부 CLI auth와 session을 어떻게 처리하는가?
+75. CLI interactive prompt를 어떻게 감지하고 처리하는가?
+76. stdout/stderr를 구조화된 결과로 어떻게 parsing하는가?
+77. Process Runner의 상세 contract는 무엇인가?
+78. OS Path Resolver의 상세 contract는 무엇인가?
+79. OS별 app data directory 위치는 어디인가?
+80. Local Worker sandboxing은 어떻게 구현하는가?

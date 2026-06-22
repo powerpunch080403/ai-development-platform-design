@@ -8,10 +8,15 @@
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
+- [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 
-## Phase 0 - Repository and Skeleton
+## Phase 0 - Public v2 Monorepo and Skeleton
 
-- 새 v2 저장소 결정
+- 새 Public `ai-development-platform` 저장소 생성
+- `apps/server`, `apps/web`, `apps/runner-agent` 구조
+- `packages/shared-contracts`, `packages/cli-adapters` 구조
+- 강한 `.gitignore`와 `.env.example`
+- uv와 pnpm 개발 환경
 - Python/FastAPI 기본 구조
 - React/TypeScript/Vite 기본 구조
 - Desktop App Shell 재사용을 고려한 Desktop-ready Web UI 구조
@@ -19,7 +24,7 @@
 - Windows와 Linux를 고려한 설정 시스템
 - 운영체제 Path Resolver
 - Process Runner 추상화
-- SQLite와 migration
+- SQLite + SQLAlchemy 2 + Alembic baseline
 - 테스트 기반
 - Ubuntu CI 또는 reference test
 - Windows CI 또는 compatibility test
@@ -28,6 +33,7 @@
 
 - 서버와 프론트엔드 skeleton이 로컬에서 실행된다.
 - 설정, 경로, 프로세스 실행 경계가 운영체제 중립 인터페이스로 분리된다.
+- Ubuntu Desktop primary와 Windows compatibility 개발 환경이 재현 가능하다.
 
 주요 위험:
 
@@ -65,7 +71,7 @@
 - Conversation과 Message
 - Owner Supervisor
 - Agent Run과 Step
-- CLI Model Adapter
+- Agent Process Adapter interface와 Mock Adapter
 - 운영체제별 CLI 실행 파일 탐색
 - 출력 스트리밍
 - 취소와 복구
@@ -73,12 +79,12 @@
 완료 조건:
 
 - 사용자가 Owner에게 요청하면 Agent Run이 생성되고 상태가 SQLite에 저장된다.
-- CLI 프로세스 출력이 UI에 스트리밍되고 재시작 후 상태를 복구할 수 있다.
+- Adapter 출력이 UI에 스트리밍되고 재시작 후 상태를 복구할 수 있다.
 
 주요 위험:
 
-- CLI 출력 문자열을 공식 도메인 상태로 직접 사용하는 것
-- CLI 로그인 만료와 프로세스 종료를 Agent Run 실패와 구분하지 못하는 것
+- Adapter 출력 문자열을 공식 도메인 상태로 직접 사용하는 것
+- Mock 결과와 저장된 공식 실행 상태를 혼합하는 것
 
 ## Phase 3 - Worker Execution
 
@@ -91,18 +97,14 @@
 - Windows와 Linux Worktree 테스트
 - 안전한 명령 실행
 - 테스트와 Diff 증거
-- Remote Test Runner Node 등록
-- Tailscale 또는 같은 사설 네트워크 연결 후보
-- Worker Capability 기반 원격 test/build/lint
-- Git commit checkout 기반 실행
-- Artifact Store 업로드와 Worker Report
-- Owner artifact 원본 검토
+- Mock Worker Adapter
+- Manual Worker Adapter
 
 완료 조건:
 
 - Worker가 별도 Worktree에서 파일을 수정하고 diff와 테스트 결과를 남긴다.
 - 기본 작업 디렉터리의 미커밋 변경을 덮어쓰지 않는다.
-- Worker가 Task Attempt 범위에서 등록된 Runner를 사용하고 Owner가 Worker Report와 원본 artifact를 검토할 수 있다.
+- README 수정 Golden Path를 외부 AI CLI 없이 완료할 수 있다.
 
 주요 위험:
 
@@ -129,6 +131,36 @@
 
 - R4 자동 실행 허용
 - 단순 `full_access` Boolean으로 권한을 표현하는 것
+
+## Phase 4A - Target CLI Adapter Integration
+
+- Codex CLI Owner Adapter
+- Antigravity CLI Worker Adapter
+- Adapter contract test
+- non-interactive 실행, auth와 prompt 실험
+- stdout/stderr와 실패 정규화
+
+완료 조건:
+
+- Mock/Manual Adapter로 검증된 Local Worker Golden Path를 목표 CLI Adapter로 다시 완료한다.
+
+주요 위험:
+
+- CLI 인증 만료, interactive prompt와 process 종료를 Agent Run 실패와 구분하지 못하는 것
+- stdout/stderr 문자열을 구조화된 결과 없이 도메인 상태로 사용하는 것
+
+## Phase 4B - Remote Test Runner
+
+- Remote Test Runner Node 등록
+- Tailscale 또는 같은 사설 네트워크 연결 후보
+- Worker Capability 기반 원격 test/build/lint
+- Git commit checkout 기반 실행
+- Artifact Store upload와 Worker Report
+- Owner artifact 원본 검토
+
+완료 조건:
+
+- Worker가 Task Attempt 범위에서 등록된 Runner를 사용하고 Owner가 Worker Report와 원본 artifact를 검토할 수 있다.
 
 ## Phase 5 - Web Experience
 
@@ -166,6 +198,8 @@
 - 보안 점검
 - 설치 문서
 - 운영 테스트
+- Golden Path 1과 2 반복 검증
+- 작은 게임 제작 Golden Path 3 검증
 
 완료 조건:
 
@@ -190,6 +224,5 @@
 - 자동 업데이트
 - 중앙 account 로그인과 다중 기기 동기화
 - Background Service 설치 방식
-- Tailscale 기반 원격 Node 연결
 - Remote AI Worker Node
 - macOS 공식 지원

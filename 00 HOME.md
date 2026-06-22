@@ -8,6 +8,8 @@
 
 현재 최우선 설계는 개인 모드 MVP다.
 
+실제 v2 구현은 별도 Public Monorepo `ai-development-platform`에서 Local Worker Golden Path부터 시작한다. 관련 결정: [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
+
 - [[01 Product/Product Vision]]
 - [[01 Product/Personal Mode MVP]]
 - [[02 Architecture/System Context]]
@@ -26,6 +28,7 @@
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
+- [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]

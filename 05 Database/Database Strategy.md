@@ -10,10 +10,11 @@
 - [[07 ADR/ADR-0010 Owner Tool Contract and Local Control Plane API]]
 - [[07 ADR/ADR-0011 Personal Runtime, Account, Device, and Session Model]]
 - [[07 ADR/ADR-0012 Remote Test Runner Worker Capability]]
+- [[07 ADR/ADR-0013 MVP Implementation Slice and Repository Strategy]]
 
 ## 개인 모드
 
-SQLite를 사용한다.
+SQLite + SQLAlchemy 2 + Alembic을 사용한다. 첫 구현 Slice에서 migration baseline을 만들며 정확한 DDL과 index는 skeleton 구현 과정에서 현재 ADR의 무결성 규칙에 맞게 작성한다.
 
 저장 데이터 후보:
 
@@ -63,6 +64,8 @@ SQLite를 사용한다.
 - audit_events
 
 개인 모드에서는 Local Control Plane이 한 사용자 중심의 로컬 데이터 저장소를 관리한다.
+
+Runtime SQLite DB는 App-managed Local Runtime의 app data directory에 두고 Public source repository에 commit하지 않는다. Alembic migration source만 구현 repository에서 version control한다.
 
 개인 프로젝트의 Approval Request와 결과, 개인 Owner Grant, 개인 자율성 설정, 로컬 감사 기록은 SQLite가 공식 원본이다.
 
