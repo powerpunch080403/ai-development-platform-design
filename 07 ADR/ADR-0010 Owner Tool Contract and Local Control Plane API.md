@@ -122,7 +122,9 @@ Primary Personal Server는 Web UI 제공, Local Control Plane, Owner Runtime, Wo
 
 > Tool Contract는 서버 내부 업무 처리 규칙이고, HTTP API는 그 기능을 UI Shell이나 다른 Node가 호출하기 위한 외부 창구다.
 
-Tool Contract provides bounded capabilities. It does not define keyword command routing from user messages. Owner Agent chooses tools; Local Control Plane enforces boundaries. (See ADR-0019)
+Tool Contract provides bounded capabilities. It does not define keyword command routing from user messages. Owner Agent chooses tools; The Local Control Plane applies the active authority envelope. In Personal Mode this envelope comes from the local user's approval mode, grants, custom restrictions, and trusted runtime configuration. In Team Mode it comes from central server/org policy. (See ADR-0019)
+
+ADR-0021 defines the Tool Call Bridge and authority-envelope model.
 
 **Owner Runtime Provider**:
 Owner Runtime Providers, including Codex CLI and future API providers, may request Tool Calls but must not bypass the Tool Contract or Local Control Plane.
@@ -499,4 +501,4 @@ Personal Node가 팀 공식 merge request 제출
 - [[05 Database/Database Strategy]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[10 Open Questions/Open Questions]]
-
+- [[07 ADR/ADR-0021 Owner Tool Call Bridge and Authority Envelope Policy]]

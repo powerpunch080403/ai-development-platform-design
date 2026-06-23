@@ -27,6 +27,8 @@ Accepted
 We define the 4 approval modes, the concept of Owner grants, the relationship between project working scope and Task write_scope, scope expansion rules, protected path handling, Owner explanation responsibilities, and the initial MVP baseline for Personal Mode.
 
 ## Approval Modes
+These four modes are Personal Mode user-facing modes. Team Mode authority profiles are intentionally deferred.
+
 We define the following 4 approval modes:
 
 ### 1. Ask for approval

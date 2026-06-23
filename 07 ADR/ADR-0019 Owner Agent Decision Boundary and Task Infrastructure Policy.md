@@ -49,6 +49,7 @@ The Owner Agent decides:
 - how to interpret Worker result/failure
 - whether to retry, continue, abandon, or recommend cleanup
 
+Owner owns judgment. Platform applies the active authority envelope and records Tool/Task execution state.
 The Owner Agent owns interpretation and planning.
 Workers own bounded execution only.
 

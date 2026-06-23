@@ -75,10 +75,10 @@ LLM은 등록된 Tool을 통해서만 외부 부작용을 실행한다. 파일, 
 
 기본 프로필:
 
-- Confirm Every Change: R0만 자동, R1 이상 사용자 승인.
-- Allow Local Work: R0, R1 자동, R2 이상 승인 또는 프로젝트 정책 적용.
-- Trusted Owner: R0, R1, 허용된 범위의 R2 자동, 사전 위임된 R3 자동 가능, R4는 항상 인간 승인.
-- Autonomous: 사용자가 가진 권한 중 명시적으로 위임한 R0~R3 작업 자동 가능, R4는 자동 수행하지 않음.
+- Ask for approval (구 Confirm Every Change): R0만 자동, R1 이상 사용자 승인.
+- Approve on my behalf (구 Allow Local Work): R0, R1 자동, R2 이상 승인 또는 프로젝트 정책 적용.
+- Full access (구 Trusted Owner): R0, R1, 허용된 범위의 R2 자동, 사전 위임된 R3 자동 가능, R4는 항상 인간 승인.
+- Custom (구 Autonomous): 사용자가 가진 권한 중 명시적으로 위임한 R0~R3 작업 자동 가능, R4는 자동 수행하지 않음.
 
 자율성 프로필은 정책 템플릿이며 실제 권한은 범위가 있는 Owner Grant로 표현한다.
 

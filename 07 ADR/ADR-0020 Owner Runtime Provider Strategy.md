@@ -123,6 +123,7 @@ Artifact
 AuditEvent
 
 ## Relationship to Tool Contract
+Owner Runtime Providers must use ADR-0021 Tool Call Bridge for platform side effects.
 Owner Runtime Provider does not own platform side effects.
 The provider may request Tool Calls.
 The Local Control Plane validates and executes Tool Calls.
@@ -170,3 +171,4 @@ For MVP:
 - ADR-0006 Owner Runtime and Agent Runs
 - ADR-0010 Owner Tool Contract and Local Control Plane API
 - ADR-0019 Owner Agent Decision Boundary and Task Infrastructure Policy
+- ADR-0021 Owner Tool Call Bridge and Authority Envelope Policy

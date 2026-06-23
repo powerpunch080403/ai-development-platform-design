@@ -70,7 +70,8 @@ Owner planning 최소 규칙:
 ## Initial Task Scope Policy
 
 ### Project Working Scope
-- Project working scope is an optional project-level boundary for Owner activity.
+- Personal Mode project working scope is optional and may act as a planning/context hint or user-granted boundary.
+- Team Mode project scope is a central visibility/capability boundary and may restrict what Owner can see before reasoning.
 - It may be set during project registration or later in project settings.
 - It can include existing files, folders, or planned files/folders.
 - It may be left unset.

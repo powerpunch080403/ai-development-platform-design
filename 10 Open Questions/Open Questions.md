@@ -236,6 +236,7 @@
 - exact custom rule UI
 - exact grant DB schema
 - Team Mode policy inheritance details
+- Team Mode authority model
 - dogfood game project scope
 - exact Owner prompt/context builder design
 - Exact Codex CLI bridge protocol

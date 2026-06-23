@@ -188,10 +188,10 @@ Owner가 diff, 테스트 증거, scope 위반, 위험도와 stale base commit을
 
 MVP에서 최소 구현할 프로필:
 
-- Confirm Every Change
-- Allow Local Work
+- Ask for approval (구 Confirm Every Change)
+- Approve on my behalf (구 Allow Local Work)
 
-Trusted Owner와 Autonomous는 후속 구현할 수 있도록 데이터 모델과 UI 확장성을 유지한다.
+Full access (구 Trusted Owner)와 Custom (구 Autonomous)은 후속 구현할 수 있도록 데이터 모델과 UI 확장성을 유지한다.
 
 단순한 `full_access` Boolean을 사용하지 않고 [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]의 Owner Grant와 위험 정책을 따른다.
 

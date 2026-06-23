@@ -121,7 +121,7 @@ The dogfood checkpoint validates that Personal Mode is useful enough for the pro
 (Next up)
 
 - local config
-- autonomy profile (Confirm Every Change, Allow Local Work 등) (Closed by ADR-0018)
+- autonomy profile (Ask for approval, Approve on my behalf 등) (Closed by ADR-0018)
 - approval preferences (Closed by ADR-0018)
 - danger flag local config only
 - cleanup preferences
