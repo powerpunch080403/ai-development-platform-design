@@ -135,6 +135,9 @@ Agent Run은 Conversation 전체와 같지 않다. 각 Run은 고유한 입력, 
 
 상태 이름은 설계 후보로 기록한다. 구체적인 상태 전이 전체는 이 ADR에서 확정하지 않는다.
 
+**Decision Boundary and Planning Responsibility**:
+Owner AgentRun is responsible for interpretation and planning. The application records and executes Tool Calls, but does not replace Owner reasoning with hardcoded keyword routing. (See ADR-0019)
+
 ## Agent Run Step
 
 Agent Run은 여러 Step으로 구성될 수 있다.

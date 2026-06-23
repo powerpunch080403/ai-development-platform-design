@@ -144,8 +144,7 @@ Task:
 - When Worker fails, control returns to Owner.
 - Owner inspects current file state, diff, logs, artifacts, and failure class.
 - Owner should explain what failed, what was preserved, and recommend the next action.
-- User normally continues by talking to Owner (e.g., "다시 해줘", "이어서 해줘", "정리해줘", "왜 실패했어?").
-- Dedicated buttons may exist later, but MVP recovery semantics should work through Owner conversation commands.
+- These phrases are conversation inputs to Owner, not direct application commands. Owner Agent decides the recovery action after inspecting state and policy.
 
 UI should show at least:
 - failure class,

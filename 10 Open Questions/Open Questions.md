@@ -122,6 +122,10 @@
 - Whether project working scope is required.
 - Whether real AI Worker is part of MVP checkpoint.
 
+### Resolved by ADR-0019
+- Should user phrases like retry/continue/cleanup directly trigger application actions?
+- Should the application implement hardcoded Owner planning heuristics?
+
 관련 문서:
 
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
@@ -230,3 +234,4 @@
 - exact grant DB schema
 - Team Mode policy inheritance details
 - dogfood game project scope
+- exact Owner prompt/context builder design

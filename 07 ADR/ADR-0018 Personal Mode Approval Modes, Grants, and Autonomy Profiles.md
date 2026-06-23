@@ -85,6 +85,7 @@ Core principles:
 - Worker never receives open-ended authority directly from User.
 - Worker cannot create, expand, or reinterpret grants.
 - Owner must be able to explain which grant allowed an action.
+- Grants authorize Owner Agent capabilities; they do not authorize keyword-triggered application commands. Owner still decides tool use through AgentRun. (See ADR-0019)
 
 Initial MVP minimum grant fields (conceptual):
 - `approval_mode`

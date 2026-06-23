@@ -10,6 +10,7 @@ ADR-0014, ADR-0015, ADR-0016, ADR-0017이 제정됨에 따라, 초기 MVP 구현
 - `07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy.md`
 - `07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy.md`
 - `07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles.md`
+- `07 ADR/ADR-0019 Owner Agent Decision Boundary and Task Infrastructure Policy.md`
 - `09 Roadmap/Personal Mode MVP Roadmap.md`
 - `10 Open Questions/Open Questions.md`
 - `01 Product/Personal Mode MVP.md`

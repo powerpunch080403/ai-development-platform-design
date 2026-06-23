@@ -188,7 +188,7 @@ Initial MVP UI should expose:
 - Settings summary
 
 ## Consequences
-- The Owner-led logic requires parsing user requests to safely scope down tasks, leading to complex prompts for the Owner LLM, but increases execution safety and avoids unlimited scope destruction.
+- Owner Agent interprets user requests and plans Tasks through AgentRun and Tool Calls. The application provides Task structure, scope enforcement, policy checks, and execution records; it does not hardcode Owner planning through keyword-triggered routing.
 - We establish the baseline requirements for MVP UI implementation, ensuring critical states are surfaced without needing complete Desktop parity immediately.
 - A strict separation of Owner execution intent (Tasks) and Worker constraints prevents out-of-scope code changes automatically.
 

@@ -19,7 +19,7 @@
 
 ## Owner-led workflow
 - **사용자는 Owner와 대화한다.**: 사용자의 모든 자연어 요청(포괄적인 큰 요청 포함)은 Owner에게 전달된다.
-- **Owner가 작업을 쪼개고 통제한다.**: Owner는 사용자 요청을 분석해 필요한 경우 승인을 요청하며, 승인 모드와 Project Working Scope에 기반하여 자율적으로 판단하여 구체적인 Task들로 분해한다.
+- **Owner가 작업을 쪼개고 통제한다.**: Owner는 사용자 요청을 분석해 필요한 경우 승인을 요청하며, 승인 모드와 Project Working Scope에 기반하여 자율적으로 판단하여 구체적인 Task들로 분해한다. The application does not replace this reasoning with hardcoded keyword routing. (See ADR-0019)
 - **Owner explains plan**: Owner는 작업 계획을 사용자에게 설명하고, 필요한 경우 질문(clarification)을 하거나, 승인(approval)을 요청한다.
 
 ## Worker execution workflow

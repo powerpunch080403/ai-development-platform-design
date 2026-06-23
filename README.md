@@ -36,6 +36,7 @@
 - [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
 - [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]
+- [[07 ADR/ADR-0019 Owner Agent Decision Boundary and Task Infrastructure Policy]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]
 - [[11 Reviews/Initial Personal Mode MVP Design Gap Audit]]
 - [[11 Reviews/Initial MVP Implementation Readiness Check]]
