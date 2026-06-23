@@ -51,6 +51,8 @@ The Owner Agent decides:
 
 Owner owns judgment. Platform applies the active authority envelope and records Tool/Task execution state.
 The Owner Agent owns interpretation and planning.
+Owner owns continuity.
+Worker receives only the current Task packet and explicitly attached context.
 Workers own bounded execution only.
 
 ## Prohibited Keyword-triggered Routing
@@ -115,6 +117,7 @@ A dedicated retry/cleanup button may exist later, but it must be an explicit UI 
 - Defining exactly which Worker models to use.
 
 ## Related ADRs
+- [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
 - ADR-0006 Owner Runtime and Agent Runs
 - ADR-0010 Owner Tool Contract and Local Control Plane API
 - ADR-0016 Initial Personal Mode MVP Execution Policy

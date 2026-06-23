@@ -20,6 +20,7 @@ updated: 2026-06-22
 - [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
 - [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]
+- [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
 
 ## 대상 사용자
 
@@ -129,7 +130,7 @@ Owner는 Internal Tool Contract를 통해서만 Local Control Plane의 상태 �
 
 ## Worker 실행
 
-첫 MVP의 Worker는 하나의 Generic Development Worker다.
+첫 MVP의 Worker는 하나의 Generic Development Worker다. Fresh Worker context per Task/Attempt is an MVP invariant.
 
 Worker는 사용자의 기본 작업 디렉터리를 직접 수정하지 않는다. Task Attempt별 Git Worktree와 작업 브랜치 안에서만 파일을 수정한다.
 

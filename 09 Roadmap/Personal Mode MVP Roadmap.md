@@ -25,6 +25,7 @@ The dogfood checkpoint validates that Personal Mode is useful enough for the pro
 - [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
 - [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]
+- [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
 
 ## Phase A: Local Runtime and Identity Complete
 (Already validated / Implementation baseline)

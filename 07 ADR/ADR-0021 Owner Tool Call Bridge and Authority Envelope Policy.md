@@ -205,6 +205,7 @@ Phase 1:
 
 Phase 2:
 - worker.start_task_attempt
+  - worker.start_task_attempt, when implemented later, must create a fresh Worker context for each TaskAttempt.
 
 Phase 3:
 - review / approval / merge / cleanup
@@ -219,6 +220,7 @@ Phase 3:
 - Safe Personal Mode implementation without unnecessary friction for "Full access" users.
 
 ## Related ADRs
+- [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
 - ADR-0010 Owner Tool Contract and Local Control Plane API
 - ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles
 - ADR-0019 Owner Agent Decision Boundary and Task Infrastructure Policy

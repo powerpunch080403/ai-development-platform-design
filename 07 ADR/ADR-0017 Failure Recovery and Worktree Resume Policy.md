@@ -71,6 +71,9 @@ Initial MVP categorizes failures into the following classes:
 ## Retry and Resume Semantics
 - A Task Attempt is one execution record.
 - A failed Attempt is not overwritten.
+- Resume does not mean implicit Worker context continuation.
+- A resumed or follow-up attempt may reuse preserved worktree state if Owner chooses, but the Worker AI context is fresh.
+- Owner must explicitly pass prior attempt summary/log/diff/artifact references when needed.
 - Automatic Worker retry creates a new Task Attempt.
 - Owner may use preserved artifacts/diff/logs from the failed Attempt to create the next Task Attempt.
 - The new Attempt should reference the previous Attempt as `retry_of_attempt_id` or `parent_attempt_id` if supported.
@@ -166,6 +169,7 @@ UI should show at least:
 - Remote Runner 세부 설계 변경
 
 ## Related ADRs
+- [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
 - [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]

@@ -32,7 +32,7 @@ Accepted
 - **Worker never asks the user for approval; Owner requests approval through Approval Policy.** 실행 전 또는 병합 전 승인은 모두 Owner가 Approval Policy에 따라 진행한다.
 - **Preflight is Owner's execution readiness check, not a mandatory user confirmation button for every Worker run.** Owner는 Worker 실행 전 repo 상태, Task 범위, write_scope, grants 등을 점검한다. 위험도가 낮고 Grant로 허용되면 매번 사용자에게 묻지 않는다.
 - **Failed, timed out, interrupted, or scope-violating worktrees are preserved by default.** timeout, Worker failure, write_scope violation 시에도 원인 분석이나 이어서 작업을 위해 worktree를 보존하며, 자동 cleanup 하지 않는다.
-- **Real AGY Worker Alpha is opt-in and controlled; it is not yet a general free-form AI worker for arbitrary user projects.** 현재 AGY Worker는 제한적인 controlled mode (예: `controlled_readme_test`, `controlled_scope_violation_test`, `controlled_timeout_test`)로만 구동되며 danger flag 기본값은 false이다. Process Runner는 background process의 stdin을 DEVNULL로 닫아 무한 대기를 방지한다.
+- **Real AGY Worker Alpha is opt-in and controlled; it is not yet a general free-form AI worker for arbitrary user projects.** 현재 AGY Worker는 제한적인 controlled mode (예: `controlled_readme_test`, `controlled_scope_violation_test`, `controlled_timeout_test`)로만 구동되며 danger flag 기본값은 false이다. Process Runner는 background process의 stdin을 DEVNULL로 닫아 무한 대기를 방지한다. AGY Worker Adapter starts each WorkerRun with a fresh model context/session. It must not reuse previous AGY chat/session context across Tasks or Attempts.
 - **First user-project-like pilot should use a separate pilot repository.** 구현 저장소나 중요 실제 저장소가 아닌 별도 pilot repository (예: `ai-development-platform-agy-pilot`)에서 먼저 사용 흐름을 검증한다.
 
 ## Consequences
@@ -53,6 +53,7 @@ Accepted
 - No implementation repository changes in this ADR.
 
 ## Related ADRs
+- [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
 - [[07 ADR/ADR-0007 Autonomy and Approval Risk Policy]]
 - [[07 ADR/ADR-0008 Personal Mode MVP and Deployment]]
 - [[07 ADR/ADR-0009 Personal Mode Core Data Model and State Machines]]
