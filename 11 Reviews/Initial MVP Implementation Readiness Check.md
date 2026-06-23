@@ -9,6 +9,7 @@ ADR-0014, ADR-0015, ADR-0016, ADR-0017이 제정됨에 따라, 초기 MVP 구현
 - `07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap.md`
 - `07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy.md`
 - `07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy.md`
+- `07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles.md`
 - `09 Roadmap/Personal Mode MVP Roadmap.md`
 - `10 Open Questions/Open Questions.md`
 - `01 Product/Personal Mode MVP.md`
@@ -17,7 +18,7 @@ ADR-0014, ADR-0015, ADR-0016, ADR-0017이 제정됨에 따라, 초기 MVP 구현
 ## Summary Verdict
 **Initial Personal Mode MVP implementation can resume.**
 
-Implementation must follow ADR-0014, ADR-0016, and ADR-0017.
+Implementation must follow ADR-0014, ADR-0016, ADR-0017, and ADR-0018.
 Any new product-direction decision must go back to the design repository first.
 
 *Note: Product owner review after readiness check clarified that Owner autonomy should be stronger than the initial conservative ADR-0016 wording. ADR-0016/0017 were updated to introduce project working scope, approval modes, and conversation-led recovery.*

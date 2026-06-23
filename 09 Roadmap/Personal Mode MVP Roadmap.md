@@ -1,7 +1,7 @@
 # Personal Mode MVP Roadmap
 
 **Status**: Implementation can resume after ADR-0017.
-*Note: ADR-0016/0017 were updated from product-owner review. Next design ADR: ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles.*
+*Note: ADR-0016/0017 were updated from product-owner review.*
 
 관련 결정:
 
@@ -16,6 +16,7 @@
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
 - [[07 ADR/ADR-0016 Initial Personal Mode MVP Execution Policy]]
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
+- [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]
 
 ## Phase A: Local Runtime and Identity Complete
 (Already validated / Implementation baseline)
@@ -109,8 +110,8 @@
 (Next up)
 
 - local config
-- autonomy profile (Confirm Every Change, Allow Local Work 등)
-- approval preferences
+- autonomy profile (Confirm Every Change, Allow Local Work 등) (Closed by ADR-0018)
+- approval preferences (Closed by ADR-0018)
 - danger flag local config only
 - cleanup preferences
 - adapter enable/disable

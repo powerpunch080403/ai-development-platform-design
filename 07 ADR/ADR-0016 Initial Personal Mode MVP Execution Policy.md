@@ -206,3 +206,4 @@ Initial MVP UI should expose:
 - [[07 ADR/ADR-0014 Owner-Led AGY Worker Alpha and Safe Pilot Policy]]
 - [[07 ADR/ADR-0015 Personal Mode Completion Scope and Design Roadmap]]
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
+- [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]

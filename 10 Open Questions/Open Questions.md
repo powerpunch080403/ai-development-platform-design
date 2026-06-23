@@ -113,6 +113,12 @@
 - How should Owner resume failed or interrupted AGY worktrees?
 - When should cleanup be automatic versus Owner/user initiated?
 
+### Resolved by ADR-0018
+- Exact semantics of Ask for approval / Approve on my behalf / Full access / Custom.
+- How project working scope interacts with task write_scope.
+- Which protected path categories can be granted under each approval mode.
+- How Owner should explain and request scope expansion.
+
 관련 문서:
 
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
@@ -211,10 +217,6 @@
 81. How to transition AGY from isolated worker to general assistant?
 
 ## Personal Mode Completion Open Questions
-- Exact semantics of Ask for approval / Approve on my behalf / Full access / Custom.
-- How project working scope interacts with task write_scope.
-- Which protected path categories can be granted under each approval mode.
-- How Owner should explain and request scope expansion.
 - How should long-running Worker processes be cancelled?
 - How should artifacts be pruned without losing audit value?
 - What is the minimum Desktop Shell requirement?
