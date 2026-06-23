@@ -1,6 +1,7 @@
 # Personal Mode MVP Roadmap
 
 **Status**: Implementation can resume after ADR-0017.
+*Note: ADR-0016/0017 were updated from product-owner review. Next design ADR: ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles.*
 
 관련 결정:
 

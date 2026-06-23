@@ -68,26 +68,25 @@ Owner planning 최소 규칙:
 - Worker cannot create new Tasks for itself.
 
 ## Initial Task Scope Policy
-- Worker-executable Task must have explicit write_scope.
-- No implicit write_scope default is allowed for Worker execution.
-- "." or whole-repository write_scope is not allowed by default in initial MVP.
-- Whole-repository write_scope requires explicit Owner explanation and user approval.
-- write_scope should be as narrow as practical.
+
+### Project Working Scope
+- Project working scope is an optional project-level boundary for Owner activity.
+- It may be set during project registration or later in project settings.
+- It can include existing files, folders, or planned files/folders.
+- It may be left unset.
+- Unset project working scope means there is no project-level restriction yet; it does not mean Workers can mutate everything without Task scope.
+- Owner uses project working scope when planning Work Items and Tasks.
+- If Owner needs to act outside project working scope, Owner must request approval unless the active approval mode/grant allows it.
+
+### Task Write Scope
+- Worker-executable Task should have an Owner-assigned Task write_scope.
+- Task write_scope is the concrete boundary passed to Worker.
+- Worker must not expand it.
+- Task write_scope should normally be inside project working scope when one exists.
+- Broad Task write_scope is allowed only when Owner explains why and approval mode/policy allows it.
+- User does not manually select files for every Task by default.
 - read_scope may be broader than write_scope.
 - forbidden_scope must always include secrets and runtime/private files.
-
-Allowed narrow examples:
-- README.md
-- docs/
-- apps/server/src/auth.py
-- apps/server/tests/test_auth.py
-
-Broad examples requiring approval:
-- .
-- src/
-- apps/
-- package manager files plus source files
-- migrations plus model files
 
 ## Protected Paths and New Files
 Protected by default:
@@ -114,10 +113,11 @@ High-risk categories requiring elevated risk / approval:
 - package manager configuration
 - files that affect broad runtime behavior
 
-- Initial MVP default: allow_new_files = false.
-- Owner may set allow_new_files = true only when the Task explicitly requires it.
-- New files in protected categories remain forbidden even if allow_new_files = true.
-- If AGY/Worker creates files outside write_scope, result commit is rejected.
+- The default posture is conservative: Worker should not create new files unless Owner's Task explicitly allows it.
+- Owner may allow new files when the Task requires new project files.
+- Protected path creation or modification requires explicit Owner intent and policy/grant approval.
+- Approval mode may relax repeated prompts but does not let Worker decide protected access by itself.
+- If AGY/Worker creates files outside the Task write_scope, the result commit is rejected.
 
 ## Owner Preflight Policy
 Preflight is Owner's execution readiness check before Worker execution.
@@ -150,9 +150,19 @@ Before Worker execution, Owner/Local Control Plane must check:
 - AgentRun should enter waiting_for_user when user action/approval is needed.
 - AgentRun should fail only for non-recoverable system errors.
 
+## Approval Modes
+Initial MVP execution policy depends on the active approval mode:
+- Ask for approval
+- Approve on my behalf
+- Full access
+- Custom
+
+Detailed grants and autonomy profiles are deferred to ADR-0018.
+
 ## Initial MVP Execution Defaults
-- Manual Worker and Mock Worker remain valid MVP baseline adapters.
-- AGY Worker remains opt-in alpha capability, not required for MVP core completion.
+- Manual and Mock Worker remain baseline validation adapters.
+- AGY or another real AI Worker path is an important initial MVP checkpoint for proving Owner/Worker operation.
+- AGY remains opt-in and controlled until future ADRs open broader automation.
 - External CLI dry-run remains diagnostic/contract validation capability.
 - Real external CLI tests are skipped by default.
 - Worker cannot run without TaskAttempt.
@@ -163,27 +173,19 @@ Before Worker execution, Owner/Local Control Plane must check:
 - Owner review is required before merge.
 - Personal Mode MVP default merge is squash merge with approval policy.
 
-AGY Alpha may be included in MVP as controlled opt-in capability, but general free-form AGY automation is not part of initial MVP acceptance.
-
 ## Initial MVP UI Minimums
-Initial MVP should expose at least:
-1. Project / Repository registration and status
-2. Conversation / Owner interaction view
-3. Work Item / Task list and detail
-4. Task Attempt / WorkerRun / Worktree status
-5. Diff and Artifact review view
-6. Approval request card
-7. Merge result / cleanup_pending status
-8. Basic settings/status view:
-   - local session/device
-   - adapter availability
-   - autonomy/profile summary
-   - danger flag read-only status
-
-- failed/timed_out/scope-violating Attempt status
-- worktree path or managed reference
-- last diff/status if available
-- error artifact/log reference
+Initial MVP UI should expose:
+- Project / Repository
+- Conversation / Owner
+- Work Item / Task
+- Task Attempt
+- WorkerRun
+- Worktree
+- Diff
+- Artifact
+- Logs
+- Approval
+- Settings summary
 
 ## Consequences
 - The Owner-led logic requires parsing user requests to safely scope down tasks, leading to complex prompts for the Owner LLM, but increases execution safety and avoids unlimited scope destruction.

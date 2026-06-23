@@ -211,8 +211,10 @@
 81. How to transition AGY from isolated worker to general assistant?
 
 ## Personal Mode Completion Open Questions
-
-- What autonomy profiles should exist in Personal Mode?
+- Exact semantics of Ask for approval / Approve on my behalf / Full access / Custom.
+- How project working scope interacts with task write_scope.
+- Which protected path categories can be granted under each approval mode.
+- How Owner should explain and request scope expansion.
 - How should long-running Worker processes be cancelled?
 - How should artifacts be pruned without losing audit value?
 - What is the minimum Desktop Shell requirement?

@@ -20,6 +20,8 @@ ADR-0014, ADR-0015, ADR-0016, ADR-0017이 제정됨에 따라, 초기 MVP 구현
 Implementation must follow ADR-0014, ADR-0016, and ADR-0017.
 Any new product-direction decision must go back to the design repository first.
 
+*Note: Product owner review after readiness check clarified that Owner autonomy should be stronger than the initial conservative ADR-0016 wording. ADR-0016/0017 were updated to introduce project working scope, approval modes, and conversation-led recovery.*
+
 ## Readiness Matrix
 
 ### A. Owner/Worker model

@@ -75,9 +75,8 @@ Initial MVP categorizes failures into the following classes:
 - Owner may use preserved artifacts/diff/logs from the failed Attempt to create the next Task Attempt.
 - The new Attempt should reference the previous Attempt as `retry_of_attempt_id` or `parent_attempt_id` if supported.
 - If the schema does not yet support `retry_of_attempt_id`, the relationship can be recorded in audit/artifact/AgentRunStep until later migration.
-- Same-Attempt re-execution is not the default MVP behavior.
-- Same-Attempt continuation may be added later only if state/audit semantics are explicitly defined.
-- MVP should avoid mutating failed Attempt history.
+- UX may feel like continuing the same work, but internally, new execution should normally create a new Attempt or follow-up Task.
+- Prior Attempt history is not overwritten.
 - `retry_requested` means Owner has decided a retry should be planned.
 - It does not mean the same Attempt will run again.
 - It should normally lead to creating a new Task Attempt.
@@ -93,7 +92,7 @@ Initial MVP categorizes failures into the following classes:
   depending on risk and policy.
 - For safety, continuation should start as a new Attempt.
 - Owner must explain whether it is using the failed worktree as reference only or as starting point.
-- If using failed worktree as starting point, Owner should request approval when the prior state includes unreviewed broad changes.
+- If using failed worktree as starting point, Owner should request approval when the prior state includes unreviewed broad changes, unless approval mode allows it.
 
 ## Abandon and Cleanup
 Abandon:
@@ -108,9 +107,9 @@ Cleanup:
 
 Policy:
 - abandon does not necessarily delete files immediately.
-- cleanup requires explicit Owner/user action or successful merge cleanup flow.
-- cleanup can be offered for abandoned/merged/failed worktrees, but failed cleanup should require user/Owner intent.
-- cleanup must never run automatically just because a Worker failed.
+- Owner may recommend cleanup when preserved worktree is no longer useful.
+- Owner may ask the user before cleanup depending on approval mode and risk.
+- Cleanup should not happen merely because a Worker failed.
 
 ## State Transitions
 Task Attempt:
@@ -142,13 +141,11 @@ Task:
 - cleaned is a physical cleanup result, not a normal failure state.
 
 ## UI and Owner Responsibilities
-Owner should explain:
-- what failed,
-- whether files were preserved,
-- what can be inspected,
-- recommended next action,
-- whether retry will create a new Attempt,
-- whether cleanup/abandon is safe.
+- When Worker fails, control returns to Owner.
+- Owner inspects current file state, diff, logs, artifacts, and failure class.
+- Owner should explain what failed, what was preserved, and recommend the next action.
+- User normally continues by talking to Owner (e.g., "다시 해줘", "이어서 해줘", "정리해줘", "왜 실패했어?").
+- Dedicated buttons may exist later, but MVP recovery semantics should work through Owner conversation commands.
 
 UI should show at least:
 - failure class,
@@ -156,11 +153,7 @@ UI should show at least:
 - Worktree status,
 - worktree path or managed reference,
 - diff/status if available,
-- process/worker error artifact,
-- retry/abandon/cleanup availability as actions or Owner commands.
-
-Actions may be exposed through Owner conversation first.
-Dedicated buttons may be added later.
+- process/worker error artifact.
 
 ## Consequences
 - Preserving failed worktrees by default increases disk space usage but ensures safe Codex-like behavior and strong auditability.

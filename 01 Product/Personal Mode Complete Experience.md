@@ -17,8 +17,8 @@
 - Worker의 작업이 실패하거나 타임아웃, write_scope를 위반하여 중단되었을 때, 그 상태(worktree)를 보존하여 디버깅하거나 작업을 이어나갈 수 있다.
 
 ## Owner-led workflow
-- **사용자는 Owner와 대화한다.**: 사용자의 모든 자연어 요청과 개발 요구사항은 Owner에게 전달된다.
-- **Owner가 작업을 나누고 Task를 만든다.**: Owner는 사용자의 요청을 분석하고, 위험도, 필요한 역량, write_scope 등을 판단하여 구체적인 Task 단위로 쪼갠다.
+- **사용자는 Owner와 대화한다.**: 사용자의 모든 자연어 요청(포괄적인 큰 요청 포함)은 Owner에게 전달된다.
+- **Owner가 작업을 쪼개고 통제한다.**: Owner는 사용자 요청을 분석해 필요한 경우 승인을 요청하며, 승인 모드와 Project Working Scope에 기반하여 자율적으로 판단하여 구체적인 Task들로 분해한다.
 - **Owner explains plan**: Owner는 작업 계획을 사용자에게 설명하고, 필요한 경우 질문(clarification)을 하거나, 승인(approval)을 요청한다.
 
 ## Worker execution workflow
@@ -33,7 +33,7 @@
 
 ## Failure and resume workflow
 - **실패한 작업은 사라지지 않고 남는다.**: 타임아웃, 프로세스 에러, write_scope 위반 등으로 작업이 실패하더라도 작업 중이던 Git worktree는 기본적으로 보존된다.
-- **사용자는 Owner와 이어서 작업하거나 정리할 수 있다.**: 사용자는 보존된 실패 기록과 산출물을 바탕으로 디버깅을 하거나, 재시도(retry), 이어서 작업(manual continuation), 또는 명시적 폐기(abandon)를 결정할 수 있다.
+- **복구는 대화 중심(Conversational Recovery)이다.**: 사용자는 Owner에게 "다시 해줘", "이어서 해줘", "정리해줘", "왜 실패했어?"라고 요청하며, Owner가 현재 파일 상태와 로그를 분석해 그에 맞는 Task Attempt를 생성하거나 폐기를 권장한다.
 
 ## Settings and safety controls
 - 로컬 환경 설정, 자율성 프로필(Autonomy Profile), 승인 선호도 등을 조정할 수 있다.

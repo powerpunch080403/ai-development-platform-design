@@ -22,9 +22,16 @@ updated: 2026-06-22
 
 ## 대상 사용자
 
-개인 모드 MVP의 대상 사용자는 Windows 또는 Linux 컴퓨터에서 앱이 관리하는 Local Runtime을 실행하고, 초기에는 브라우저 접근 가능한 UI에서 Owner와 대화하며 개인 Git 프로젝트를 개발하려는 개발자다.
+- 단일 로컬 기기(PC/Laptop)에서 개발을 진행하는 1인 개발자 또는 개인 프로젝트 진행자.
+- 안전하고 격리된 환경에서 AI에게 코딩을 맡기고 싶지만, 언제든 개입하고 검토할 수 있는 주도권을 원하는 사용자.
 
-팀 초대, 중앙 Authority, 다중 사용자 협업보다 먼저 개인 개발 루프를 안정화한다.
+## Core Philosophy
+- Initial MVP is the first checkpoint where Owner and Worker operate together like an agentic Codex-style app with Task structure.
+- User interacts with Owner, not Worker.
+- Owner can act autonomously within approval mode and project working scope.
+- Worker executes Task only.
+- Real AI Worker path such as AGY is an important checkpoint, not necessarily the only MVP core dependency.
+
 
 ## 해결하려는 문제
 
