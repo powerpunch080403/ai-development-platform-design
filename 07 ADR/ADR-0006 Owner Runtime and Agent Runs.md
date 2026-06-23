@@ -138,6 +138,9 @@ Agent Run은 Conversation 전체와 같지 않다. 각 Run은 고유한 입력, 
 **Decision Boundary and Planning Responsibility**:
 Owner AgentRun is responsible for interpretation and planning. The application records and executes Tool Calls, but does not replace Owner reasoning with hardcoded keyword routing. (See ADR-0019)
 
+**Owner Runtime Provider**:
+Owner AgentRuns are executed through an Owner Runtime Provider. The initial MVP provider is Codex CLI, but the Owner Runtime model remains provider-agnostic.
+
 ## Agent Run Step
 
 Agent Run은 여러 Step으로 구성될 수 있다.

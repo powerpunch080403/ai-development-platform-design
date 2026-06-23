@@ -32,6 +32,7 @@ updated: 2026-06-22
 - Owner can act autonomously within approval mode and project working scope.
 - Worker executes Task only.
 - Real AI Worker path such as AGY is an important checkpoint, not necessarily the only MVP core dependency.
+- Initial MVP uses Codex CLI as the first Owner Runtime Provider. The product must remain open to API-based and CLI-based Owner runtimes.
 
 ## Initial MVP completion target
 The initial Personal Mode MVP is considered achieved when:

@@ -56,6 +56,9 @@ The dogfood checkpoint validates that Personal Mode is useful enough for the pro
 - Tool Call Envelope 및 idempotency key
 - Local Policy Engine 및 Approval Interruption
 - Owner Grant 및 Risk levels 기본 구조
+- Owner Runtime Provider abstraction
+- Codex CLI Owner provider MVP
+- Future API Owner provider
 
 ## Phase D: Work Item/Task/Attempt Complete
 (Implementation in progress)

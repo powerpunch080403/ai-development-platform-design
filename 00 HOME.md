@@ -36,6 +36,7 @@
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
 - [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]
 - [[07 ADR/ADR-0019 Owner Agent Decision Boundary and Task Infrastructure Policy]]
+- [[07 ADR/ADR-0020 Owner Runtime Provider Strategy]]
 - [[08 Repository Audit/Keep Rewrite Delete]]
 - [[09 Roadmap/Redesign Roadmap]]
 - [[09 Roadmap/Personal Mode MVP Roadmap]]

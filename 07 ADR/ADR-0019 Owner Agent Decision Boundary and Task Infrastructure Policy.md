@@ -18,6 +18,9 @@ The application must not implement keyword-triggered command routing as the prim
 User messages are natural-language intent inputs to Owner AgentRuns.
 They are not direct application commands.
 
+**Owner Runtime Provider**:
+The Owner Agent may be powered by Codex CLI in the initial MVP, but the decision boundary remains the same: the platform provides structure and tools; the Owner agent runtime decides which tools to call.
+
 ## Application Responsibilities
 The application provides:
 - Conversation storage

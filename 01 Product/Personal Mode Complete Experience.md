@@ -62,3 +62,4 @@
 - [ ] Testing and Validation (E2E)
 - [ ] Settings and User Control UI
 - [ ] Documentation and Operability (가이드 작성)
+- [ ] Owner Runtime Provider Strategy (Codex CLI MVP provider)

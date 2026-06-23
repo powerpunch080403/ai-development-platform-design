@@ -124,6 +124,9 @@ Primary Personal Server는 Web UI 제공, Local Control Plane, Owner Runtime, Wo
 
 Tool Contract provides bounded capabilities. It does not define keyword command routing from user messages. Owner Agent chooses tools; Local Control Plane enforces boundaries. (See ADR-0019)
 
+**Owner Runtime Provider**:
+Owner Runtime Providers, including Codex CLI and future API providers, may request Tool Calls but must not bypass the Tool Contract or Local Control Plane.
+
 이 분리로 Desktop App, local IPC, background queue와 Central Authority API가 추가되어도 Tool Contract와 application service 규칙을 재사용할 수 있다.
 
 ## Tool Registry

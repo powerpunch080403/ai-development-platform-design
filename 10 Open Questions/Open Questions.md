@@ -126,6 +126,9 @@
 - Should user phrases like retry/continue/cleanup directly trigger application actions?
 - Should the application implement hardcoded Owner planning heuristics?
 
+### Resolved by ADR-0020
+- Which Owner runtime should the initial MVP use? Answer: Codex CLI.
+
 관련 문서:
 
 - [[07 ADR/ADR-0004 Governance and Approval Policy]]
@@ -235,3 +238,9 @@
 - Team Mode policy inheritance details
 - dogfood game project scope
 - exact Owner prompt/context builder design
+- Exact Codex CLI bridge protocol
+- Exact API provider protocol
+- Streaming UI behavior
+- Provider cancellation semantics
+- Provider context packaging
+- Provider tool call serialization
