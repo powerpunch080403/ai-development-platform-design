@@ -33,6 +33,13 @@ updated: 2026-06-22
 - Worker executes Task only.
 - Real AI Worker path such as AGY is an important checkpoint, not necessarily the only MVP core dependency.
 
+## Initial MVP completion target
+The initial Personal Mode MVP is considered achieved when:
+- Owner and Worker can operate together through Task structure.
+- C-level UI surfaces are available: Project/Repository, Conversation/Owner, Work Item/Task, Task Attempt, WorkerRun, Worktree, Diff, Artifact, Logs, Approval, Settings summary.
+- A controlled real AI Worker path, such as AGY, can complete at least one happy path under Owner control.
+- Failure/retry/recovery can return to Owner conversation.
+- The product owner can dogfood the system by pausing platform development and using Personal Mode to build a small game project.
 
 ## 해결하려는 문제
 

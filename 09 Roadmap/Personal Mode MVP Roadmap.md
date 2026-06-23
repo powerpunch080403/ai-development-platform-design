@@ -3,6 +3,14 @@
 **Status**: Implementation can resume after ADR-0017.
 *Note: ADR-0016/0017 were updated from product-owner review.*
 
+## Recommended implementation sequence after design readiness:
+1. Owner-Led MVP Execution Alignment
+2. MVP UI State Surface
+3. Real AI Worker MVP Checkpoint
+4. Dogfood Game Project
+
+The dogfood checkpoint validates that Personal Mode is useful enough for the product owner to use the platform to build a real small game project.
+
 관련 결정:
 
 - [[07 ADR/ADR-0005 Personal and Team Runtime Topology]]

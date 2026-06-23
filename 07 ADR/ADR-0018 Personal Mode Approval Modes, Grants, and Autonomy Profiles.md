@@ -44,14 +44,27 @@ We define the following 4 approval modes:
 ### 3. Full access
 - User gives Owner broad authority within the selected project/repository context.
 - Owner may plan Tasks, approve scope expansions, and continue work with minimal interruption.
+- Full access may reduce or remove repeated prompts in Personal Mode, including danger-level prompts, when the user has explicitly enabled such grants in local settings. Owner remains responsible for explanation, audit, and Task-bounded Worker execution.
 - This does not mean Worker has unrestricted independent authority.
 - Worker still acts only through Owner-created Tasks.
 - Owner must still prevent obviously dangerous, secret-leaking, or source-repo-destroying behavior.
+- Worker cannot self-authorize, expand scope, or merge/push directly.
 
 ### 4. Custom
 - User defines custom rules by project, path, risk category, action type, or adapter.
 - Custom can be stricter or looser than the default profiles.
 - Detailed custom rule UI may be incremental, but the concept is part of the model.
+
+## Personal Mode vs Team Mode Authority Boundaries
+- In Personal Mode, the user is the local authority.
+- Full access and Custom may permit danger-level operations if:
+  1. the user explicitly grants the authority,
+  2. local configuration allows it,
+  3. Owner records/explains the decision,
+  4. Worker receives only a concrete Owner-created Task.
+- Danger-level permission must never be enabled only by arbitrary request body input.
+- In Team Mode, central server / organization policy defines the maximum allowed authority.
+- A Personal Mode local grant cannot override Team Mode organizational policy.
 
 ## Grants
 A grant is a user-approved authorization that allows Owner to perform or approve certain actions under defined boundaries.
@@ -97,8 +110,8 @@ Project working scope governs Owner planning boundaries, whereas Task write_scop
 - Can include existing files/folders.
 - Can include planned files/folders.
 - Can be left unset.
-- Unset means no project-level scope restriction has been configured yet.
-- Unset does not let Worker act without Task write_scope.
+- If unset, Owner may act freely within the user's active approval/grant boundaries.
+- Unset does not let Worker act without Task write_scope. Worker still only acts through Owner-created Tasks.
 
 ### Task write_scope
 - Concrete per-Task mutation boundary assigned by Owner.

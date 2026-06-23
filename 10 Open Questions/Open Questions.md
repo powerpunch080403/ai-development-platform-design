@@ -118,6 +118,9 @@
 - How project working scope interacts with task write_scope.
 - Which protected path categories can be granted under each approval mode.
 - How Owner should explain and request scope expansion.
+- Whether MVP exposes all approval modes.
+- Whether project working scope is required.
+- Whether real AI Worker is part of MVP checkpoint.
 
 관련 문서:
 
@@ -223,3 +226,7 @@
 - What backup/export behavior is required for local SQLite/app data?
 - What is the first pilot repository and first real project scope?
 - Does Tailscale serve as a hard requirement for all remote access, or strictly an optional capability?
+- exact custom rule UI
+- exact grant DB schema
+- Team Mode policy inheritance details
+- dogfood game project scope

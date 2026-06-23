@@ -23,6 +23,8 @@ Any new product-direction decision must go back to the design repository first.
 
 *Note: Product owner review after readiness check clarified that Owner autonomy should be stronger than the initial conservative ADR-0016 wording. ADR-0016/0017 were updated to introduce project working scope, approval modes, and conversation-led recovery.*
 
+*Product owner final cutline: Implementation can resume with the target that initial MVP includes Owner/Worker operation, C-level UI state surfaces, and a controlled real AI Worker happy path. Personal Mode Full access/Custom may permit danger-level operations only under explicit local user grant and local configuration. Team Mode authority remains bounded by central policy.*
+
 ## Readiness Matrix
 
 ### A. Owner/Worker model
