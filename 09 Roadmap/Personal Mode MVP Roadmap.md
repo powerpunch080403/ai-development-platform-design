@@ -26,6 +26,13 @@ The dogfood checkpoint validates that Personal Mode is useful enough for the pro
 - [[07 ADR/ADR-0017 Failure Recovery and Worktree Resume Policy]]
 - [[07 ADR/ADR-0018 Personal Mode Approval Modes, Grants, and Autonomy Profiles]]
 - [[07 ADR/ADR-0022 Worker Fresh Context Per Task Policy]]
+- [[07 ADR/ADR-0023 CLI Runtime, Worker Execution, and Open Source Integration Strategy]]
+
+## Next Implementation Refactor:
+1. Fix Worker.device_id FK bug.
+2. Introduce WorkerExecutionService boundary.
+3. Isolate BackgroundTasks behind LocalBackground executor.
+4. Introduce ProcessRuntimeProvider boundary later.
 
 ## Phase A: Local Runtime and Identity Complete
 (Already validated / Implementation baseline)
